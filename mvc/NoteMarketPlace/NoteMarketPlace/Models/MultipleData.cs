@@ -12,7 +12,18 @@ namespace NoteMarketPlace.Models
 
         public Context.tblNoteType NoteType { get; set; }
 
+
+        public Context.tblSellerNote sellerNote { get; set; }
+
         public Context.tblCountry Country { get; set; }
+
+
+        public Context.tblDownload download { get; set; }
+
+        public Context.tblUserProfile userProfile { get; set; }
+
+
+        public Context.tblReferenceData referenceData { get; set; }
 
 
 

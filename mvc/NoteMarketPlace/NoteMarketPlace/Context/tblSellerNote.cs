@@ -11,6 +11,7 @@ namespace NoteMarketPlace.Context
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Web;
 
@@ -51,6 +52,9 @@ namespace NoteMarketPlace.Context
 
         [Required]
         public bool IsPaid { get; set; }
+
+        [DefaultValue(0)]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Valid Decimal number with maximum 0 decimal places.")]
         public Nullable<decimal> SellingPrice { get; set; }
         public string NotesPreview { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
