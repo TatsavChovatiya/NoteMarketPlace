@@ -1,0 +1,1562 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans";
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.inputselect {
+    text-overflow: ellipsis;
+    padding-right: 25%;
+    margin-bottom: 10px;
+}
+
+.leftmarg {
+    margin-left: 10px;
+}
+
+.btnintable {
+    color: #fff;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 600;
+}
+
+.dogreen {
+    background-color: #28a745;
+    border-radius: 3px;
+    border: none;
+    height: 40px;
+    width: 112px;
+}
+
+.dored {
+    background-color: #ff3636;
+    border-radius: 3px;
+    border: none;
+    height: 40px;
+    width: 112px;
+}
+
+.dogrey {
+    background-color: #cccccc;
+    border-radius: 3px;
+    border: none;
+    height: 40px;
+    width: 112px;
+}
+
+.dobottom {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.margbo {
+    margin-bottom: 3px;
+}
+
+.r-border {
+    border-right: 1px solid #d1d1d1;
+    padding-right: 40px;
+}
+
+/* For Background */
+#my-background {
+    min-height: 100%;
+    width: 100%;
+    overflow: scroll;
+    background-image: url("../images/pre-login/banner-with-overlay.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+
+.mytext {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+/* Fields */
+Input[type=email],
+Input[type=password],
+Input[type=text],
+Input[type=date] {
+    border: 1px solid #6255a5;
+    height: 50px;
+    border-radius: 3px;
+}
+
+.mytext span {
+    color: #6255a5;
+}
+
+/* For header Element */
+h2 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+}
+
+p {
+    margin-bottom: 30px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19px;
+    color: #333333;
+}
+
+Input[type=checkbox] {
+    border: 1px solid #d1d1d1;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+}
+
+/* Style Form's Label */
+.mylabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+}
+
+/* Form's Button */
+#mybtn {
+    background-color: #6255a5;
+    height: 50px;
+    border-radius: 3px;
+    color: #fff;
+    margin-top: 10px;
+    border: none;
+    font-style: "Open Sans";
+    font-size: 18px;
+    line-height: 22px;
+    width: 100%;
+}
+
+/* Focus on Feilds */
+.InputEmail1:focus,
+.InputPassword1:focus {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #000;
+}
+
+.InputEmail1::-webkit-input-placeholder,
+.InputPassword1::-webkit-input-placeholder {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #8a8a8a;
+}
+
+.InputEmail1:-ms-input-placeholder,
+.InputPassword1:-ms-input-placeholder {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #8a8a8a;
+}
+
+.InputEmail1::placeholder,
+.InputPassword1::placeholder {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+    color: #8a8a8a;
+}
+
+/* Eye For Password Field */
+.wrapper {
+    position: relative;
+}
+
+.wrapper img {
+    position: absolute;
+    top: 35%;
+    right: 4%;
+}
+
+.wrapper img.searchimage {
+    position: absolute;
+    left: 2%;
+}
+
+.wrapper img.searchimage.doup {
+    position: absolute;
+    left: 5%;
+    top: 24.5%;
+}
+
+.wrapper i {
+    position: absolute;
+    top: 32%;
+    right: 3%;
+}
+
+/* Content Box */
+.content-box-md {
+    margin: 60px 0;
+}
+
+.wrapper-image {
+    position: relative;
+}
+
+.wrapper-image .uploadmypic {
+    position: absolute;
+    top: 45% !important;
+    left: 50%;
+    -webkit-transform: translate(-50%, -40%);
+    transform: translate(-50%, -40%);
+}
+
+/*===============================
+            Header
+================================*/
+.givecolor {
+    color: #6255a5 !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #6255a5;
+    color: #fff !important;
+}
+
+.dropdown-menu {
+    -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20 0 rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.dropdown-menu a {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
+    font-family: "Open Sans";
+    color: #333333;
+}
+
+.navbar {
+    height: 100px;
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+}
+
+ul.navbar-nav > li > a {
+    font-family: "Open Sans", sans-serif;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+ul.navbar-nav > li > a:hover,
+ul.navbar-nav > li > a:focus {
+    background: none;
+    color: #6255a5;
+    border-bottom: 3px solid #6255a5;
+}
+
+.userprofile-user-icon {
+    height: 40px;
+    width: 40px;
+    margin: 0 15px;
+}
+
+/* White Navigation */
+
+.white-nav-top {
+    background: #fff;
+    -webkit-box-shadow: 0 8px 6px -9px #999;
+    box-shadow: 0 8px 6px -9px #999;
+    z-index: 2;
+}
+
+.white-nav-top ul.navbar-nav > li > a:hover,
+.white-nav-top ul.navbar-nav > li > a:focus {
+    border-bottom: 3px solid #6255a5;
+    color: #6255a5;
+}
+
+.white-nav-top ul.navbar-nav > li > a {
+    color: #000;
+}
+
+#mynavbtn {
+    border-radius: 3px;
+    background-color: #fff;
+    font-style: "Open Sans";
+    font-size: 16px !important;
+    color: #6255a5;
+    width: 89px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.white-nav-top #mynavbtn {
+    background-color: #6255a5;
+    color: #fff;
+}
+
+/*===============================
+            Footer
+================================*/
+footer {
+    width: 100%;
+    height: 60px;
+    border-top: 1.5px solid #ced4da;
+    margin-top: auto;
+}
+
+footer .aaa {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/*===============================
+            Login Page
+================================*/
+
+/* For Create Form in center */
+#loginpage {
+    padding: 10%;
+}
+
+/* For Form Section */
+#loginform {
+    margin-top: 25px;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.errorborder {
+    border: 1px solid #ff5e5e !important;
+    border-left-width: 3px !important;
+}
+
+#loginform Input[type=email] {
+    margin-bottom: 30px;
+}
+
+
+
+#loginform .mycheckbox {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+    margin-left: 22px;
+    margin-top: 7.5px;
+}
+
+
+
+#loginform .myforgotlabel {
+    font-family: "Open Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #6255a5;
+}
+
+#loginform .container {
+    padding: 0;
+}
+
+.errormsg p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 20px;
+    color: #FF3636;
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+.mycheck123 {
+    margin-bottom: 30px;
+}
+
+/*=====================================
+            Forgot Password Page
+=======================================*/
+
+/* For Create Form in center */
+#forgotpasswordpage {
+    padding: 10%;
+}
+
+/* For Form Section */
+#forgotpasswordform {
+    margin-top: 25px;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+
+/*=====================================
+            Change Password Page
+=======================================*/
+/* For Create Form in center */
+#changepasswordpage {
+    padding: 10%;
+}
+
+/* For Form Section */
+#changepasswordform {
+    margin-top: 25px;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+
+#changepasswordform Input[type=password] {
+    margin-bottom: 30px;
+}
+
+/*=====================================
+            Sign Up Page
+=======================================*/
+/* For Create Form in center */
+#signuppage {
+    padding: 10%;
+}
+
+
+/* For Form Section */
+#signupform {
+    margin-top: 25px;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.tempspace {
+    margin-bottom: 30px;
+}
+
+#signuppage .text2 p {
+    margin-bottom: 10px;
+    color: #28a745;
+}
+
+#signuppage #signup-head p span {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #333333;
+    margin-bottom: 0;
+}
+
+/*=====================================
+            User Profile
+=======================================*/
+
+/* Bacground Image Section 1 */
+.user-profile {
+    margin-top: 160px;
+}
+
+.head h3 {
+    margin-bottom: 40px;
+    font-size: 34px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#basic-profile-details .marginright {
+    margin-right: 15px;
+}
+
+#basic-profile-details .marginright .wrapper img {
+    position: absolute;
+    top: 36%;
+    right: 12%;
+}
+
+.user-profile Input[type=email],
+.user-profile Input[type=password],
+.user-profile Input[type=text],
+.user-profile Input[type=date] {
+    border: 1px solid #ced4da;
+}
+
+.user-profile Input[type=date]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    z-index: 888;
+}
+
+.upload-profile-picture Input[type=file] {
+    height: 110px;
+    position: relative;
+    color: transparent;
+}
+
+Input[type=file]::-webkit-file-upload-button {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -40%);
+    transform: translate(-50%, -40%);
+    height: 90px;
+    width: 120px;
+    z-index: 999;
+    opacity: 0;
+}
+
+.upload-profile-picture .uploadmypic {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -40%);
+    transform: translate(-50%, -40%);
+}
+
+.upload-profile-picture .uploadmypic h6 {
+    color: #ced4da !important;
+    font-size: 18px;
+}
+
+/*=================================
+            Email Verification
+===================================*/
+#email-verification {
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    position: relative;
+}
+
+#email-verification .email-container .whitebg {
+    left: 50%;
+    top: 50%;
+    padding: 30px;
+    background-color: #fff;
+    position: absolute;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+}
+
+#email-verification .verification-content h2 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    margin-top: 50px;
+    line-height: 30px;
+}
+
+#email-verification .verification-content h4 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+#email-verification .verification-content p {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0;
+    color: #333333;
+}
+
+#email-verification .verification-content h1 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: #333333;
+}
+
+#email-verification .verification-content #mybtn {
+    width: 540px;
+}
+
+/*=================================
+            Home Page
+===================================*/
+
+#home-page-img {
+    height: 620px;
+    width: 100%;
+    position: relative;
+    background-image: url("../images/banner-with-overlay.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#home-page-img .home-header-content {
+    position: absolute;
+    top: 60%;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+
+#home-page-img .home-header-content .main-text h1 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 54px;
+    color: #ffffff;
+}
+
+#home-page-img .home-header-content .extra-text p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+    margin: 0;
+    font-weight: 400;
+    line-height: 30px;
+    color: #ffffff;
+}
+
+#home-page-img .home-header-content #mybtn {
+    border: 1px solid #fff;
+    background-color: transparent;
+    width: 172px;
+}
+
+#home-page-second-section.content-box-md {
+    margin: 60px 0;
+}
+
+#home-page-second-section.content-box-md h2 {
+    margin-bottom: 0;
+}
+
+#home-page-second-section.content-box-md p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    margin: 0;
+    color: #333333;
+}
+
+#home-page-second-section.content-box-md .ann p {
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+#home-page-third-section.content-box-md2 {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+#home-page-third-section.content-box-md2 h2 {
+    margin-bottom: 0;
+}
+
+#home-page-third-section.content-box-md2 .box-home {
+    margin-top: 60px;
+}
+
+#home-page-third-section.content-box-md2 .box-home .myimg2 {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    position: relative;
+    -webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+#home-page-third-section.content-box-md2 .box-home .myimg2 img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#home-page-third-section.content-box-md2 .box-home #mybtn {
+    background-color: #6255a5;
+    font-size: 18px;
+    font-weight: 600;
+    width: 172px;
+    margin-top: 0;
+}
+
+#home-page-third-section.content-box-md2 h3 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    margin-bottom: 20px;
+}
+
+#home-page-third-section.content-box-md2 p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #333333;
+}
+
+#home-page-forth-section.content-box-md {
+    margin: 60px 0;
+}
+
+#home-page-forth-section.content-box-md .feedback-box {
+    border-right: 3px;
+    -webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    text-align: left;
+}
+
+
+
+#home-page-forth-section.content-box-md .feedback-box h3 {
+    margin-bottom: 10px;
+}
+
+#home-page-forth-section.content-box-md .feedback-box p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+#home-page-forth-section.content-box-md .feedbacks {
+    margin: 60px 0;
+}
+
+#home-page-forth-section.content-box-md .feedback-box .feedback-text p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #333333;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+#home-page-forth-section.content-box-md .feedbacks .first-r-f {
+    margin-bottom: 30px;
+}
+
+
+/*=================================
+            Search Page
+===================================*/
+
+#search-page-second-section h3 {
+    margin-bottom: 20px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+select {
+    background-image: url("../images/user-profile/down-arrow.png") !important;
+    background-position: calc(100% - 20px) 20px, calc(100% - 20px) 14px, 100% 0;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select:enabled {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+}
+
+select.form-control {
+    height: 50px;
+}
+
+.search-bar {
+    background-repeat: no-repeat;
+    padding-left: 40px;
+    background-position: left;
+}
+
+#search-page-second-section .filter-part {
+    padding: 30px;
+    background-color: #f9f9f9;
+}
+
+
+#search-page-second-section .filter-part input {
+    border: 1px solid #d1d1d1;
+}
+
+#search-page-second-section .filter-part input::-webkit-input-placeholder {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+}
+
+#search-page-second-section .filter-part input:-ms-input-placeholder {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+}
+
+#search-page-second-section .filter-part input::placeholder {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #8a8a8a;
+}
+
+#search-page-second-section .first-input {
+    margin-bottom: 20px;
+}
+
+#search-page-second-section .wrapper img {
+    position: absolute;
+    top: 36%;
+    right: 4%;
+}
+
+#search-page-third-section h3 {
+    margin-bottom: 30px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+#search-page-third-section .book-info {
+    border: 1px solid #d1d1d1;
+    margin-bottom: 30px;
+}
+
+#search-page-third-section .book-info img {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+#search-page-third-section .book-info .book-info-content h6 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 26px;
+    color: #6255a5;
+    margin-bottom: 30px;
+}
+
+#search-page-third-section .book-info .book-info-content .sub-info p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+#search-page-third-section .book-info .book-info-content .sub-info p.inappropriate-mark span {
+    color: #df3434;
+}
+
+#search-page-third-section .book-title {
+    min-height: 80px;
+}
+
+.rate {
+    float: left;
+}
+
+.rate:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+}
+
+.rate:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rate > input:checked ~ label {
+    color: #ffc107;
+
+}
+
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #ffc107;
+
+}
+
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #ffc107;
+
+}
+
+.pagination {
+    margin-bottom: 60px;
+}
+
+.pagination li a {
+    color: #333333;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0 5px;
+    border: none;
+}
+
+.pagination .selected a {
+    background: #6255a5;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 50%;
+    line-height: 20px;
+
+}
+
+
+/*===============================
+            Notes Details
+================================*/
+
+#notes-details-first-section {
+    margin-top: 160px;
+}
+
+#notes-details-first-section .head h3,
+#notes-details-second-section .head h3 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    margin-bottom: 20px;
+}
+
+.content-box-md hr {
+    margin: 0;
+}
+
+#notes-details-first-section h2 {
+    margin-bottom: 15px;
+}
+
+#notes-details-second-section h5 {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+    margin-bottom: 5px;
+
+}
+
+#notes-details-first-section h5 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 26px;
+}
+
+#notes-details-second-section p,
+#notes-details-first-section p {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0;
+
+}
+
+#notes-details-second-section p {
+    margin-top: 5px;
+}
+
+#notes-details-second-section .customer-reviews {
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    padding: 30px;
+}
+
+#notes-details-second-section {
+    margin-bottom: 60px;
+}
+
+#notes-details-first-section p {
+    margin-bottom: 10px;
+}
+
+#notes-details-first-section #mybtn {
+    margin-top: 0;
+    width: 204px;
+}
+
+.inappropriate p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #df3434;
+    margin-bottom: 0 !important;
+    margin-top: 10px !important;
+}
+
+#notes-details-first-section .left-side-note h5 {
+    font-size: 18px;
+    line-height: 36px;
+    font-weight: 400;
+    color: #333333;
+    margin-bottom: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+#notes-details-first-section .right-side-note h5,
+.numofreview {
+    font-size: 18px !important;
+    line-height: 36px !important;
+    color: #6255a5 !important;
+    font-weight: 600 !important;
+    font-style: normal;
+    margin-bottom: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+
+.responsive-wrapper {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+}
+
+.responsive-wrapper img,
+.responsive-wrapper object,
+.responsive-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
+#Iframe-Cicis-Menu-To-Go {
+    max-width: 666.67px;
+    max-height: 600px;
+    overflow: hidden;
+}
+
+.responsive-wrapper-padding-bottom-90pct {
+    padding-bottom: 112%;
+}
+
+.rate-fa i {
+    font-size: 18px;
+    color: #d1d1d1;
+}
+
+.rate-fa i.giverate {
+
+    color: #ffc700;
+}
+
+#exampleModal h3 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    color: #333333;
+}
+
+#exampleModal h2 {
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+#exampleModal p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #333333;
+    margin-bottom: 30px;
+    margin-top: 0 !important;
+}
+
+#exampleModal p.para-4 {
+    margin-bottom: 0;
+}
+
+#exampleModal {
+    margin-top: 150px;
+}
+
+#exampleModal .modal-header {
+    border: none;
+}
+
+#exampleModal .model-data {
+    padding-bottom: 30px;
+    padding-left: 40px;
+    padding-right: 55px;
+}
+
+/*===============================
+            Dashboard
+================================*/
+#dashboard-second-section select {
+    width: 100%;
+}
+
+.admin-top {
+    margin-top: 160px;
+    margin-bottom: 0 !important;
+}
+
+.getmargr {
+    margin-right: 15px;
+    width: 25%;
+}
+
+#dashboard-first-section {
+    margin-top: 160px;
+}
+
+#dashboard-first-section h3 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 34px;
+    margin: 0;
+}
+
+#dashboard-first-section h2 {
+    margin-bottom: 30px;
+}
+
+#dashboard-first-section #mybtn {
+    width: 150px;
+    margin-top: 0;
+}
+
+#dashboard-first-section p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+#dashboard-first-section .fill-box {
+    border: 1px solid #d1d1d1;
+}
+
+#dashboard-first-section .main-box-l {
+    border: 1px solid #d1d1d1;
+    border-right: none;
+}
+
+#dashboard-first-section .main-box-r {
+    border: 1px solid #d1d1d1;
+    border-left: none;
+}
+
+#dashboard-first-section .rmvmar {
+    padding-right: 0;
+}
+
+
+
+#dashboard-second-section h3,
+#dashboard-third-section h3 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    margin-bottom: 30px;
+}
+
+#dashboard-second-section Input[type=email],
+#dashboard-third-section Input[type=email] {
+    width: 322px;
+    border: 1px solid #d1d1d1;
+    margin-bottom: 20px;
+}
+
+#dashboard-second-section #mybtn,
+#dashboard-third-section #mybtn {
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 117px;
+}
+
+.admin-dashboard #mybtn {
+    width: auto !important;
+}
+
+.marge-left #mybtn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#dashboard-top {
+    margin: 150px 0 60px 0;
+}
+
+#dashboard-top .rmvpadding {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
+.dashboar-heading h2 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 38px;
+    color: #6255a5;
+}
+
+.dashboard-top-title {
+    margin-bottom: 20px;
+}
+
+.mynote-info p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #333333;
+    min-height: 50px;
+}
+
+.mynote-info h4 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 34px;
+    color: #6255a5;
+}
+
+.dash-right {
+    border: 1px solid #d1d1d1;
+    padding: 30px 30px 0px 30px;
+}
+
+#dashboard-top #mybtn {
+    width: 150px;
+    margin: 0;
+}
+
+.giveinnerpadding {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.giveinnerpadding .mylabel {
+    -webkit-transform: translateY(30%);
+    transform: translateY(30%);
+    margin-left: 10px;
+}
+
+/* Table */
+
+.table-responsive {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+}
+
+table {
+    border: 1px solid #d1d1d1;
+    border-radius: 3px;
+    margin-bottom: 50px !important;
+}
+
+table th {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #333333;
+}
+
+table td {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333333;
+
+}
+
+table tr {
+    height: 75px;
+    white-space: nowrap;
+}
+
+.headr-wrap tr {
+    white-space: normal;
+}
+
+table tbody tr:hover {
+    -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dobig {
+    font-size: 21px;
+}
+
+/*===============================
+            Add Notes 
+================================*/
+textarea.form-control {
+    height: 153px;
+}
+
+Input[type=radio] {
+    height: 35px;
+    width: 35px;
+}
+
+input[type='radio']:checked:after {
+    width: 22px;
+    height: 22px;
+    border-radius: 15px;
+    top: 6.2px;
+    left: 6.7px;
+    position: relative;
+    background-color: #6255a5;
+    content: ' ';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+
+
+/*===============================
+            My Downloads 
+================================*/
+
+.mydownload-margin {
+    margin-top: 160px !important;
+}
+
+.mydownload-margin h3 {
+    font-size: 34px !important;
+    font-weight: 600 !important;
+    line-height: 38px !important;
+}
+
+.dowhite {
+    color: #d1d1d1;
+}
+
+.getpurple {
+    color: #6255a5;
+}
+
+.modal-download {
+    margin-top: 200px !important;
+}
+
+.modal-download .model-head p {
+    font-size: 24px !important;
+    line-height: 28px !important;
+    margin: 0 !important;
+    font-weight: 600 !important;
+    color: #6255a5 !important;
+    margin-bottom: 15px !important;
+}
+
+.modal-download .model-data {
+    padding: 30px 50px !important;
+    padding-top: 0 !important;
+}
+
+.modal-download #mybtn {
+    width: 150px;
+    margin-top: 15px;
+}
+
+.modal-download textarea {
+    height: 100px;
+}
+
+.modal-download .rate {
+    margin-bottom: 30px;
+    -webkit-transform: none !important;
+    transform: none !important;
+}
+
+/*===============================
+            Contacy Us 
+================================*/
+.contact-us .head h3 {
+    margin-bottom: 10px;
+}
+
+.contact-us .head .mylabel {
+    margin-bottom: 50px !important;
+}
+
+.contact-us textarea {
+    height: 245px;
+}
+
+.contact-us #mybtn {
+    width: 150px;
+    margin-top: 20px;
+}
+
+/*===============================
+            FAQ
+================================*/
+.faq h3 {
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.card-body {
+    display: none;
+    border: 1px solid #d1d1d1;
+    margin-bottom: 15px;
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+}
+
+.card-body.mybody3 {
+    margin-bottom: 0 !important;
+}
+
+.card-body.mybody5 {
+    margin-bottom: 0 !important;
+}
+
+.card-body.mybody7 {
+    margin-bottom: 0 !important;
+}
+
+.card-header h4 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    font-family: "Open Sans";
+    color: #333333;
+}
+
+.card-body h4 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    font-family: "Open Sans";
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.card-body p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    font-family: "Open Sans";
+    color: #333333;
+    margin: 0;
+    width: 90%;
+}
+
+.card-header {
+    margin-bottom: 15px;
+    border-bottom: none;
+    -webkit-transition: all 300ms linear;
+    transition: all 300ms linear;
+}
+
+.card-header.myhead3 {
+    margin-bottom: 0;
+}
+
+.card-header.myhead5 {
+    margin-bottom: 0;
+}
+
+.card-header.myhead7 {
+    margin-bottom: 0;
+}

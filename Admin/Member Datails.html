@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- important meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>Member Details</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome/fontawesome-free-5.15.1-web/css/fontawesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome/fontawesome-free-5.15.1-web/css/brands.css">
+    <link rel="stylesheet" href="css/font-awesome/fontawesome-free-5.15.1-web/css/solid.css">
+
+    <!-- Custome CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+
+</head>
+
+<body data-target=".navbar">
+
+    <!-- Note Details -->
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg white-nav-top white-navbar">
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <!-- Mobile Menu Open Button -->
+                    <span id="mobile-nav-open-btn">&#9776;</span>
+
+                    <!-- Logo -->
+                    <a class="navbar-brand" href=""><img class="img-fluid" src="images/pre-login/Capture.png"></a>
+                </div>
+
+                <!-- Main Menu -->
+                <div class="collapse navbar-collapse justify-content-end default-header" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Dashboard.html"><span>Dashboard</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>Notes</span></a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="Note%20Under%20Review.html">Notes Under Review</a>
+                                <a class="dropdown-item" href="Published%20Notes.html">Published Notes</a>
+                                <a class="dropdown-item" href="Downloaded%20Notes.html">Downloaded Notes</a>
+                                <a class="dropdown-item" href="Rejected%20Notes%20.html">Rejected Notes</a>
+                            </div>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Members.html"><span>Members</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>Reports</span></a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="Spam%20Reports.html">Spam Reports</a>
+                            </div>
+
+                        </li>
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>Settings</span></a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="Manage%20System%20Configuration.html">Manage System Configuration</a>
+                                <a class="dropdown-item" href="Manage Administrator.html">Manage Administrator</a>
+                                <a class="dropdown-item" href="Manage%20Category.html">Manage Category</a>
+                                <a class="dropdown-item" href="Manage%20Type.html">Manage Type</a>
+                                <a class="dropdown-item" href="Manage Country.html">Manage Countries</a>
+                            </div>
+
+                        </li>
+                        <li class="nav-item">
+                            <div class="userprofile-user-icon dropdown">
+                                <a role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"> <img src="images/user-profile/team-1.jpg" class="img-fluid rounded-circle" alt="User"></a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="My%20Profile.html">Update Profile</a>
+                                    <a class="dropdown-item" href="#">Change Password</a>
+                                    <a class="dropdown-item givecolor" href="#">LOGOUT</a>
+                                </div>
+                            </div>
+
+                        </li>
+                        <li class="nav-item">
+
+                            <a type="button" class="nav-link" id="mynavbtn">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div id="mobile-nav">
+                    <!-- Mobile Menu Close Button -->
+                    <span id="mobile-nav-close-btn">&times;</span>
+
+                    <div id="mobile-nav-content">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="Dashboard.html"><span>Dashboard</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>Notes</span></a>
+                                <div class="dropdown-menu  text-center" aria-labelledby="dropdownMenuLink">
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Note%20Under%20Review.html">Notes Under Review</a>
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Published%20Notes.html">Published Notes</a>
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Downloaded%20Notes.html">Downloaded Notes</a>
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Rejected%20Notes%20.html">Rejected Notes</a>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Members.html"><span>Members</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>Reports</span></a>
+                                <div class="dropdown-menu  text-center" aria-labelledby="dropdownMenuLink">
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Spam%20Reports.html">Spam Reports</a>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>Settings</span></a>
+                                <div class="dropdown-menu  text-center" aria-labelledby="dropdownMenuLink">
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Manage%20System%20Configuration.html">Manage System Configuration</a>
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Manage Administrator.html">Manage Administrator</a>
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Manage%20Category.html">Manage Category</a>
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Manage%20Type.html">Manage Type</a>
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="dropdown-item" href="Manage Country.html">Manage Countries</a>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <a role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"> <img src="images/user-profile/team-1.jpg" class="img-fluid rounded-circle" alt="User"></a>
+                                    <div class="dropdown-menu  text-center" aria-labelledby="dropdownMenuLink">
+                                        <div class="col-12">
+                                            <a class="dropdown-item " href="My%20Profile.html">Update Profile</a>
+                                        </div>
+                                        <div class="col-12">
+                                            <a class="dropdown-item" href="#">Change Password</a>
+                                        </div>
+                                        <div class="col-12">
+                                            <a class="dropdown-item givecolor" href="#">LOGOUT</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li class="nav-item">
+                                <a type="button" class="nav-link" id="mynavbtn">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+    <!-- Header Ends -->
+
+
+    <!-- Third Section -->
+    <section id="notes-details-first-section">
+        <div class="container docenter">
+            <div class="row">
+                <div class="col-12 col-md-12 col-sm-12">
+                    <div class="head">
+                        <h2>Member Details</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-7 r-border">
+                            <div class="row docenter">
+                                <div class=" col-12 col-sm-4 col-md-5 col-lg-4">
+                                    <img class="img-fluid" src="images/user-profile/team-1.jpg">
+                                </div>
+                                <div class="col-12 col-sm-8 col-md-7 col-lg-8">
+                                    <div class="row">
+                                        <div class="col-6 col-sm-6 col-md-6 left-side-note text-left">
+                                            <h5>First Name:</h5>
+                                            <h5>Last Name:</h5>
+                                            <h5>Email:</h5>
+                                            <h5>DOB:</h5>
+                                            <h5>Phone Number:</h5>
+                                            <h5>College/University:</h5>
+                                        </div>
+                                        <div class="col-6 col-sm-6 col-md-6 right-side-note text-left">
+                                            <h5>Richard</h5>
+                                            <h5>Brown</h5>
+                                            <h5>final16700@gmail.com</h5>
+                                            <h5>16-07-2000</h5>
+                                            <h5>7359665134</h5>
+                                            <h5>Un.of California</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-5 margin-top">
+                            <div class="row">
+                                <div class="col-6 col-sm-3 col-md-2 col-lg-5 left-side-note text-left">
+                                    <h5>Address 1:</h5>
+                                    <h5>Address 2:</h5>
+                                    <h5>City:</h5>
+                                    <h5>State:</h5>
+                                    <h5>Country:</h5>
+                                    <h5>Zip Code:</h5>
+                                </div>
+                                <div class="col-6 col-sm-4 col-md-6 col-lg-7 right-side-note text-left">
+                                    <h5>144-Diamond</h5>
+                                    <h5>Star Colony</h5>
+                                    <h5>New York</h5>
+                                    <h5>New York State</h5>
+                                    <h5>United State</h5>
+                                    <h5>11004-05</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Third Section Ends-->
+
+    <div class="content-box-md">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="notes-details-secondd-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-3 col-lg-5">
+                    <h3>Notes</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="grid-table table-responsive-xl">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="align-middle text-center">SR NO.</th>
+                                    <th scope="col" class="align-middle">NOTE TITLE</th>
+                                    <th scope="col" class="align-middle">CATEGORY</th>
+                                    <th scope="col" class="align-middle">STATUS</th>
+                                    <th scope="col" class="align-middle">DOWNLOADED NOTES</th>
+                                    <th scope="col" class="align-middle">TOTAL EARNINGS</th>
+                                    <th scope="col" class="align-middle">DATE ADDED</th>
+                                    <th scope="col" class="align-middle">PUBLISHED DATE</th>
+                                    <th scope="col" class="align-middle"></th>
+                                    <th scope="col" class="align-middle"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="headr-wrap">
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td class="getpurple">Software Development</td>
+                                    <td>IT</td>
+                                    <td>Published</td>
+                                    <td align="center" class="getpurple">22</td>
+                                    <td align="center">$177</td>
+                                    <td>09-10-2020,10:10</td>
+                                    <td>09-10-2020,10:10</td>
+                                    <td align="center">
+                                        <div class="dropdown">
+                                            <a type="button" data-toggle="dropdown">
+                                                <i class="fas fa-ellipsis-v dowhite"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">2</td>
+                                    <td class="getpurple">Computer Basic</td>
+                                    <td>Computer</td>
+                                    <td>Published</td>
+                                    <td align="center" class="getpurple">4</td>
+                                    <td align="center">$125</td>
+                                    <td>10-10-2020,12:30</td>
+                                    <td>10-10-2020,12:30</td>
+                                    <td align="center">
+                                        <div class="dropdown">
+                                            <a type="button" data-toggle="dropdown">
+                                                <i class="fas fa-ellipsis-v dowhite"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">3</td>
+                                    <td class="getpurple">Human Body</td>
+                                    <td>Science</td>
+                                    <td>InReview</td>
+                                    <td align="center" class="getpurple">17</td>
+                                    <td align="center">$978</td>
+                                    <td>11-10-2020,01:00</td>
+                                    <td>11-10-2020,01:00</td>
+                                    <td align="center">
+                                        <div class="dropdown">
+                                            <a type="button" data-toggle="dropdown">
+                                                <i class="fas fa-ellipsis-v dowhite"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">4</td>
+                                    <td class="getpurple">World war z</td>
+                                    <td>History</td>
+                                    <td>Published</td>
+                                    <td align="center" class="getpurple">28</td>
+                                    <td align="center">$15254</td>
+                                    <td>12-10-2020,10:10</td>
+                                    <td>12-10-2020,10:10</td>
+                                    <td align="center">
+                                        <div class="dropdown">
+                                            <a type="button" data-toggle="dropdown">
+                                                <i class="fas fa-ellipsis-v dowhite"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">5</td>
+                                    <td class="getpurple">Accounting</td>
+                                    <td>Account</td>
+                                    <td>Published</td>
+                                    <td align="center" class="getpurple">0</td>
+                                    <td align="center">$69</td>
+                                    <td>13-10-2020,11:25</td>
+                                    <td>NA</td>
+                                    <td align="center">
+                                        <div class="dropdown">
+                                            <a type="button" data-toggle="dropdown">
+                                                <i class="fas fa-ellipsis-v dowhite"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#">Download Notes</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <nav>
+            <div class="container">
+                <div class="row justify-content-center">
+
+
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                        <li class="page-item selected"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <footer>
+        <div class="aaa">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 col-md-6">
+                        <p>
+                            Version : 1.1.24
+                        </p>
+                    </div>
+                    <div class="col-8 col-md-6 text-right">
+                        <p>
+                            Copyright &copy; Tatvasoft All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+
+
+
+    <!-- User Profile End -->
+    <!-- JQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Popper -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body></html>
