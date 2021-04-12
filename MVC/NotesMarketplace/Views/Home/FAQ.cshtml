@@ -1,0 +1,270 @@
+﻿@model IEnumerable<NotesMarketplace.FAQ>
+
+@{
+    ViewBag.activelink_faq = "active-link";
+    ViewBag.Title = "FAQ";
+    if (ViewBag.IsValid == "true")
+    {
+        Layout = "~/Views/Shared/Register.cshtml";
+        ViewBag.IsValid = null;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Non_Register.cshtml";
+    }
+}
+
+@{
+    foreach (var faqs in Model)
+    {
+
+
+    }
+}
+<section class="setfooter">
+    <!-- First Section -->
+    <section>
+        <div id="user-profile-img">
+            <div class="centerh2">
+
+                <h2>Frequently Asked Questions</h2>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Second Section -->
+    <section class="content-box-md faq">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="head">
+                        <h3>General Questions</h3>
+                    </div>
+
+                    <!-- First -->
+                    <div class="card-header myhead1">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>What is Marketplace-Notes?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="showdata1" type="button">
+                                    <img src="~/Content/images/FAQ/add.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body mybody1">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>What is Marketplace-Notes?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="hidedata1" type="button">
+                                    <img src="~/Content/images/FAQ/minus.png">
+                                </a>
+                            </div>
+                        </div>
+                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+                    </div>
+                    <!-- Second -->
+                    <div class="card-header myhead2">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>What do the Unvidersity say?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="showdata2" type="button">
+                                    <img src="~/Content/images/FAQ/add.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body mybody2">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>What do the Unvidersity say?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="hidedata2" type="button">
+                                    <img src="~/Content/images/FAQ/minus.png">
+                                </a>
+                            </div>
+                        </div>
+                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+                    </div>
+                    <!-- Third -->
+                    <div class="card-header myhead3">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>Is this legal?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="showdata3" type="button">
+                                    <img src="~/Content/images/FAQ/add.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body mybody3">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>Is this legal?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="hidedata3" type="button">
+                                    <img src="~/Content/images/FAQ/minus.png">
+                                </a>
+                            </div>
+                        </div>
+                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Second Section Ends-->
+    <!-- Second Section -->
+    <section class="content-box-md faq">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="head">
+                        <h3>Uploaders</h3>
+                    </div>
+
+                    <!-- First -->
+                    <div class="card-header myhead4">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>What can't i sell?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="showdata4" type="button">
+                                    <img src="~/Content/images/FAQ/add.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body mybody4">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>What can't i sell?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="hidedata4" type="button">
+                                    <img src="~/Content/images/FAQ/minus.png">
+                                </a>
+                            </div>
+                        </div>
+                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+                    </div>
+                    <!-- Second -->
+                    <div class="card-header myhead5">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>What notes can i sell?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="showdata5" type="button">
+                                    <img src="~/Content/images/FAQ/add.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body mybody5">
+                        <div class="row">
+                            <div class="col-md-6 col-10">
+                                <h4>What notes can i sell?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="hidedata5" type="button">
+                                    <img src="~/Content/images/FAQ/minus.png">
+                                </a>
+                            </div>
+                        </div>
+                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Second Section Ends-->
+    <!-- Second Section -->
+    <section class="content-box-md faq">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="head">
+                        <h3>Downloaders</h3>
+                    </div>
+
+                    <!-- First -->
+                    <div class="card-header myhead6">
+                        <div class="row">
+                            <div class="col-md-6 col-10 ">
+                                <h4>How do i buy Notes?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="showdata6" type="button">
+                                    <img src="~/Content/images/FAQ/add.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body mybody6">
+                        <div class="row">
+                            <div class="col-md-6 col-10 ">
+                                <h4>How do i buy Notes?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="hidedata6" type="button">
+                                    <img src="~/Content/images/FAQ/minus.png">
+                                </a>
+                            </div>
+                        </div>
+                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+                    </div>
+                    <!-- Second -->
+                    <div class="card-header myhead7">
+                        <div class="row">
+                            <div class="col-md-6 col-10 ">
+                                <h4>Can i edit the notes i purchased?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="showdata7" type="button">
+                                    <img src="~/Content/images/FAQ/add.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body mybody7">
+                        <div class="row">
+                            <div class="col-md-6 col-10 ">
+                                <h4>Can i edit the notes i purchased?</h4>
+                            </div>
+                            <div class="col-md-6 col-2 text-right">
+                                <a class="hidedata7" type="button">
+                                    <img src="~/Content/images/FAQ/minus.png">
+                                </a>
+                            </div>
+                        </div>
+                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Second Section Ends-->
+
+
+</section>

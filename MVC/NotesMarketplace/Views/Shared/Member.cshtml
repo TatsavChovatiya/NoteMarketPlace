@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- important meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>@ViewBag.Title</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="@Url.Content("~/Content/images/favicon/favicon.ico")">
+
+
+    <!-- Google Fonts -->
+    <link href="@Url.Content("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap")" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    @Styles.Render("~/Content/css/bootstrap/bootstrap.min.css")
+
+    <!-- Custome CSS -->
+    @Styles.Render("~/Content/css/style.css")
+
+    <!-- Responsive CSS -->
+    @Styles.Render("~/Content/css/responsive.css")
+    
+
+</head>
+
+<body class="fullsize">
+
+    @RenderBody()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/myscript")
+    
+</body>
+</html>

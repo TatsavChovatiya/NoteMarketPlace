@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ff70518e0697479f85b758f7318b71d2" Name="Diagram1">
+        <EntityTypeShape EntityType="NotesMarketplaceModel.AdminProfile" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.CTC" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.DownloadedNote" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.FAQ" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.Feedback" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.ManageCTC" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.NotesDetail" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.NotesStatu" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.SpamReport" Width="1.5" PointX="7.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.Statistic" Width="1.5" PointX="5.25" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.SystemConfiguration" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.UserProfile" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.UserRole" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="NotesMarketplaceModel.User" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_Admin_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_ManageCTC_CTC" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_DownloadedNotes_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_DownloadedNotes_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_Feedback_NotesDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_Feedback_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_NotesDetails_NotesStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_NotesDetails_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_SpamReport_NotesDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_SpamReport_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_Statistics_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="NotesMarketplaceModel.FK_UserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

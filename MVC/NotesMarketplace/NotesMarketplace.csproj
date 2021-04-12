@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BCEEC174-D18F-4209-A406-0FE222435249}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NotesMarketplace</RootNamespace>
+    <AssemblyName>NotesMarketplace</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44381</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Portable, Version=18.4200.0.46, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Net.Core.18.4.0.46\lib\netstandard2.0\Syncfusion.Compression.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=18.4460.0.46, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.18.4.0.46\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Portable, Version=18.4200.0.46, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.Net.Core.18.4.0.46\lib\netstandard2.0\Syncfusion.Pdf.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.4.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminProfile.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="CTC.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DownloadedNote.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FAQ.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Feedback.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ManageCTC.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChangePassword.cs" />
+    <Compile Include="Models\ContactUs.cs" />
+    <Compile Include="Models\DownloadRequests.cs" />
+    <Compile Include="Models\Feedbacks.cs" />
+    <Compile Include="Models\My_Downloads.cs" />
+    <Compile Include="Models\My_Dropdown.cs" />
+    <Compile Include="Models\My_Search.cs" />
+    <Compile Include="Models\SearchPageModel.cs" />
+    <Compile Include="MyClass\RandomPassword.cs" />
+    <Compile Include="NotesDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotesStatu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpamReport.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SystemConfiguration.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserProfile.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRole.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome\brands.css" />
+    <Content Include="Content\css\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\css\font-awesome\fontawesome.css" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\css\font-awesome\solid.css" />
+    <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\banner-with-overlay.jpg" />
+    <Content Include="Content\images\banner.jpg" />
+    <Content Include="Content\images\Dashboard\edit.png" />
+    <Content Include="Content\images\Dashboard\eye.png" />
+    <Content Include="Content\images\Dashboard\search.jpg" />
+    <Content Include="Content\images\FAQ\add.png" />
+    <Content Include="Content\images\FAQ\minus.png" />
+    <Content Include="Content\images\favicon\favicon.ico" />
+    <Content Include="Content\images\front\arrow-down.png" />
+    <Content Include="Content\images\front\arrow-down.svg" />
+    <Content Include="Content\images\front\banner.png" />
+    <Content Include="Content\images\front\calendar.png" />
+    <Content Include="Content\images\front\calendar.svg" />
+    <Content Include="Content\images\front\close-icon.svg" />
+    <Content Include="Content\images\front\close.png" />
+    <Content Include="Content\images\front\computer-science.png" />
+    <Content Include="Content\images\front\customer-1.png" />
+    <Content Include="Content\images\front\customer-2.png" />
+    <Content Include="Content\images\front\customer-3.png" />
+    <Content Include="Content\images\front\customer-4.png" />
+    <Content Include="Content\images\front\date.png" />
+    <Content Include="Content\images\front\date.svg" />
+    <Content Include="Content\images\front\delete.png" />
+    <Content Include="Content\images\front\dots.png" />
+    <Content Include="Content\images\front\dots.svg" />
+    <Content Include="Content\images\front\download.png" />
+    <Content Include="Content\images\front\earning-icon.svg" />
+    <Content Include="Content\images\front\edit.png" />
+    <Content Include="Content\images\front\eye.png" />
+    <Content Include="Content\images\front\facebook.png" />
+    <Content Include="Content\images\front\favicon.ico" />
+    <Content Include="Content\images\front\flag.png" />
+    <Content Include="Content\images\front\Flag.svg" />
+    <Content Include="Content\images\front\left-arrow.png" />
+    <Content Include="Content\images\front\left-arrow.svg" />
+    <Content Include="Content\images\front\linkedin.png" />
+    <Content Include="Content\images\front\login-bg-img.png" />
+    <Content Include="Content\images\front\logo.png" />
+    <Content Include="Content\images\front\logo.svg" />
+    <Content Include="Content\images\front\minus.png" />
+    <Content Include="Content\images\front\my-earning.png" />
+    <Content Include="Content\images\front\pages.png" />
+    <Content Include="Content\images\front\pages.svg" />
+    <Content Include="Content\images\front\plus.png" />
+    <Content Include="Content\images\front\reviewer-1.png" />
+    <Content Include="Content\images\front\reviewer-2.png" />
+    <Content Include="Content\images\front\reviewer-3.png" />
+    <Content Include="Content\images\front\right-arrow.png" />
+    <Content Include="Content\images\front\right-arrow.svg" />
+    <Content Include="Content\images\front\sample-pdf.png" />
+    <Content Include="Content\images\front\search-icon.png" />
+    <Content Include="Content\images\front\search-icon.svg" />
+    <Content Include="Content\images\front\search1.png" />
+    <Content Include="Content\images\front\search2.png" />
+    <Content Include="Content\images\front\search3.png" />
+    <Content Include="Content\images\front\search4.png" />
+    <Content Include="Content\images\front\search5.png" />
+    <Content Include="Content\images\front\search6.png" />
+    <Content Include="Content\images\front\seller.png" />
+    <Content Include="Content\images\front\star-white.png" />
+    <Content Include="Content\images\front\star.png" />
+    <Content Include="Content\images\front\top-logo.png" />
+    <Content Include="Content\images\front\twitter.png" />
+    <Content Include="Content\images\front\university.png" />
+    <Content Include="Content\images\front\university.svg" />
+    <Content Include="Content\images\front\upload-file.png" />
+    <Content Include="Content\images\front\upload-file.svg" />
+    <Content Include="Content\images\front\upload-note.png" />
+    <Content Include="Content\images\front\upload-note.svg" />
+    <Content Include="Content\images\front\upload.svg" />
+    <Content Include="Content\images\front\user-img.png" />
+    <Content Include="Content\images\Homepage\download.png" />
+    <Content Include="Content\images\home\banner-with-overlay.jpg" />
+    <Content Include="Content\images\home\banner.jpg" />
+    <Content Include="Content\images\home\customer-1.png" />
+    <Content Include="Content\images\home\customer-2.png" />
+    <Content Include="Content\images\home\customer-3.png" />
+    <Content Include="Content\images\home\customer-4.png" />
+    <Content Include="Content\images\home\download.png" />
+    <Content Include="Content\images\home\facebook.png" />
+    <Content Include="Content\images\home\linkedin.png" />
+    <Content Include="Content\images\home\logo.png" />
+    <Content Include="Content\images\home\seller.png" />
+    <Content Include="Content\images\home\top-logo.png" />
+    <Content Include="Content\images\home\twitter.png" />
+    <Content Include="Content\images\Notes Details\1.jpg" />
+    <Content Include="Content\images\Notes Details\close.png" />
+    <Content Include="Content\images\Notes Details\SUCCESS.png" />
+    <Content Include="Content\images\pre-login\banner-with-overlay.jpg" />
+    <Content Include="Content\images\pre-login\Capture.png" />
+    <Content Include="Content\images\pre-login\eye.png" />
+    <Content Include="Content\images\pre-login\top-logo.png" />
+    <Content Include="Content\images\Search\1.jpg" />
+    <Content Include="Content\images\Search\2.jpg" />
+    <Content Include="Content\images\Search\3.jpg" />
+    <Content Include="Content\images\Search\4.jpg" />
+    <Content Include="Content\images\Search\5.jpg" />
+    <Content Include="Content\images\Search\6.jpg" />
+    <Content Include="Content\images\user-profile\calendar.png" />
+    <Content Include="Content\images\user-profile\down-arrow.png" />
+    <Content Include="Content\images\user-profile\team-1.jpg" />
+    <Content Include="Content\images\user-profile\upload.png" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\js\all.js" />
+    <Content Include="Scripts\js\all.min.js" />
+    <Content Include="Scripts\js\brands.js" />
+    <Content Include="Scripts\js\brands.min.js" />
+    <Content Include="Scripts\js\conflict-detection.js" />
+    <Content Include="Scripts\js\conflict-detection.min.js" />
+    <Content Include="Scripts\js\fontawesome.js" />
+    <Content Include="Scripts\js\fontawesome.min.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\js\regular.js" />
+    <Content Include="Scripts\js\regular.min.js" />
+    <Content Include="Scripts\js\solid.js" />
+    <Content Include="Scripts\js\solid.min.js" />
+    <Content Include="Scripts\js\v4-shims.js" />
+    <Content Include="Scripts\js\v4-shims.min.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\script.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\images\Dashboard\Thumbs.db" />
+    <Content Include="Content\images\front\sample.pdf" />
+    <Content Include="Content\images\front\Thumbs.db" />
+    <Content Include="Content\images\Homepage\Thumbs.db" />
+    <Content Include="Content\images\Notes Details\Thumbs.db" />
+    <Content Include="Content\images\pre-login\Thumbs.db" />
+    <Content Include="Content\images\user-profile\Thumbs.db" />
+    <Content Include="Content\css\bootstrap\bootstrap.min.css.map" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\css\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\css\font-awesome\fonts\FontAwesome.otf" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Uploads\BookPicture\2101032021170448.PNG" />
+    <Content Include="Uploads\BookPicture\2103032021102638.PNG" />
+    <Content Include="Uploads\BookPicture\2127022021103745.PNG" />
+    <Content Include="Uploads\BookPicture\2127022021103841.PNG" />
+    <Content Include="Uploads\BookPicture\2127022021110855.PNG" />
+    <Content Include="Uploads\BookPicture\2128022021135239.PNG" />
+    <Content Include="Uploads\BookPicture\2128022021141320.PNG" />
+    <Content Include="Uploads\BookPicture\Default.png" />
+    <Content Include="Uploads\BookPreview\2127022021103745.pdf" />
+    <Content Include="Uploads\BookPreview\2127022021103841.pdf" />
+    <Content Include="Uploads\BookPreview\2127022021110855.pdf" />
+    <Content Include="Uploads\Books\2127022021103745.pdf" />
+    <Content Include="Uploads\Books\2127022021103841.pdf" />
+    <Content Include="Uploads\Books\2127022021110855.pdf" />
+    <Content Include="Uploads\ProfilePicture\21hfhbshvbadyig.PNG" />
+    <Content Include="Uploads\ProfilePicture\23hfhbshvbadyig.PNG" />
+    <Content Include="Uploads\ProfilePicture\25hfhbshvbadyig.png" />
+    <Content Include="Uploads\ProfilePicture\Default.png" />
+    <None Include="Views\Home\BuyerRequests.cshtml" />
+    <Content Include="Views\Home\InProgress.cshtml" />
+    <Content Include="Uploads\Books\2101032021144651.pdf" />
+    <Content Include="Uploads\Books\2101032021145158.pdf" />
+    <Content Include="Uploads\Books\2101032021152039.pdf" />
+    <Content Include="Uploads\Books\2101032021155604.pdf" />
+    <Content Include="Uploads\Books\2101032021155913.pdf" />
+    <Content Include="Uploads\Books\2101032021160238.pdf" />
+    <Content Include="Uploads\Books\2101032021162511.pdf" />
+    <Content Include="Uploads\Books\2101032021162733.pdf" />
+    <Content Include="Uploads\Books\2101032021163046.pdf" />
+    <Content Include="Uploads\Books\2101032021163845.pdf" />
+    <Content Include="Uploads\Books\2101032021164043.pdf" />
+    <Content Include="Uploads\Books\2101032021164129.pdf" />
+    <Content Include="Uploads\Books\2101032021164203.pdf" />
+    <Content Include="Uploads\Books\2101032021164215.pdf" />
+    <Content Include="Uploads\Books\2101032021164235.pdf" />
+    <Content Include="Uploads\Books\2101032021164243.pdf" />
+    <Content Include="Uploads\Books\2101032021165754.pdf" />
+    <Content Include="Uploads\Books\2101032021170448.pdf" />
+    <Content Include="Uploads\Books\2101032021170653.pdf" />
+    <Content Include="Uploads\Books\2103032021102638.pdf" />
+    <Content Include="Uploads\Books\2128022021135239.pdf" />
+    <Content Include="Uploads\Books\2128022021141320.pdf" />
+    <Content Include="Uploads\Books\2128022021141920.pdf" />
+    <Content Include="Uploads\Books\2128022021142031.pdf" />
+    <Content Include="Uploads\Books\2128022021142142.pdf" />
+    <Content Include="Uploads\Books\2128022021142519.pdf" />
+    <Content Include="Uploads\Books\2128022021142812.pdf" />
+    <Content Include="Uploads\Books\2128022021143549.pdf" />
+    <Content Include="Uploads\Books\2128022021143833.pdf" />
+    <Content Include="Uploads\Books\2128022021161005.pdf" />
+    <Content Include="Uploads\Books\2128022021161036.pdf" />
+    <Content Include="Uploads\Books\2128022021161229.pdf" />
+    <Content Include="Uploads\Books\2128022021161702.pdf" />
+    <Content Include="Uploads\Books\2128022021161748.pdf" />
+    <Content Include="Uploads\Books\2128022021161923.pdf" />
+    <Content Include="Uploads\Books\2128022021162436.pdf" />
+    <Content Include="Uploads\Books\2128022021162709.pdf" />
+    <None Include="Views\Home\SignUp.cshtml" />
+    <None Include="Views\Home\ForgotPassword.cshtml" />
+    <None Include="Views\Home\ChangePassword.cshtml" />
+    <None Include="Views\Home\EmailVerification.cshtml" />
+    <None Include="Views\Home\FAQ.cshtml" />
+    <None Include="Views\Home\ContactUs.cshtml" />
+    <None Include="Views\Home\Search.cshtml" />
+    <None Include="Views\Home\NoteDetails.cshtml" />
+    <Content Include="Views\Home\Submitted.cshtml" />
+    <Content Include="Views\Home\DownloadedNote.cshtml" />
+    <Content Include="Views\Home\RejectedNotes.cshtml" />
+    <None Include="Views\Home\SoldNotes.cshtml" />
+    <None Include="Views\Home\UserProfile.cshtml" />
+    <None Include="Views\Home\Home.cshtml" />
+    <None Include="Views\Home\AddNotes.cshtml" />
+    <None Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\Member.cshtml" />
+    <Content Include="Views\Shared\Non_Register.cshtml" />
+    <Content Include="Views\Shared\Register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54307</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44381/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <Import Project="..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.0\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

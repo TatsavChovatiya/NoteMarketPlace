@@ -1,0 +1,261 @@
+﻿@model NotesMarketplace.Models.My_Downloads
+@using PagedList
+@using PagedList.Mvc
+@{
+	ViewBag.Title = "My Downloads";
+	Layout = "~/Views/Shared/Register.cshtml";
+}
+
+<section class="setfooter">
+	<div class="outerbox">
+		<section id="dashboard-second-section" class="mydownload-margin">
+			<div class="container">
+				<div class="row top-table">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-6">
+						<h3>My Downloads</h3>
+					</div>
+					<div class="col-12 col-sm-12 col-md-12 col-lg-6">
+						<form>
+							<div class="row justify-content-end">
+								<div class="wrapper">
+
+									<img src="~/Content/images/Dashboard/search.jpg" class="searchimage doup">
+									<input name="search" value="@Request.QueryString["search"]" class=" abcd form-control search-bar InputEmail1" placeholder="Search">
+									<input hidden name="pagindex" value="@Request.QueryString["pageindex"]" />
+									<input hidden name="shorthead" value="@Request.QueryString["shorthead"]" />
+								</div>
+								<div class="marge-left">
+									<button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>Search</b></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="grid-table table-responsive-xl">
+							<table class="table">
+								<thead>
+									<tr style="cursor:default">
+										<th scope="col" class="align-middle text-center">SR NO.</th>
+										<th scope="col" class="align-middle dopointer" onclick="@("window.location.href='" + @Url.Action("DownloadedNote","Home",new {shorthead="title",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })+"'");">NOTE TITLE</th>
+										<th scope="col" class="align-middle dopointer" onclick="@("window.location.href='" + @Url.Action("DownloadedNote","Home",new {shorthead="category",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })+"'");">CATEGORY</th>
+										<th scope="col" class="align-middle dopointer" onclick="@("window.location.href='" + @Url.Action("DownloadedNote","Home",new {shorthead="buyer",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })+"'");">SELLER</th>
+										<th scope="col" class="align-middle">SELL TYPE</th>
+										<th scope="col" class="align-middle dopointer" onclick="@("window.location.href='" + @Url.Action("DownloadedNote","Home",new {shorthead="price",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })+"'");">PRICE</th>
+										<th scope="col" class="align-middle dopointer" onclick="@("window.location.href='" + @Url.Action("DownloadedNote","Home",new {shorthead="",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })+"'");">DOWNLOADED DATE/TIME</th>
+										<th scope="col" class="align-middle"></th>
+										<th scope="col" class="align-middle"></th>
+										<th scope="col" class="align-middle"></th>
+									</tr>
+								</thead>
+								<tbody>
+									@if (Model.downloadRequests.Count() == 0)
+									{
+										<tr> <td colspan="11" class="align-middle"> Records not found </td></tr>
+									}
+									@{
+										int index = 0;
+										if (String.IsNullOrEmpty(Request.QueryString["pageindex"]) || Request.QueryString["pageindex"].Equals("1"))
+										{
+											index = 0;
+										}
+										else
+										{
+											index = Convert.ToInt32(Request.QueryString["pageindex"]) * 10;
+										}
+									}
+									@for (int i = 0; i < Model.downloadRequests.Count(); i++)
+									{
+										NotesMarketplace.Models.DownloadRequests downloadedNote = Model.downloadRequests[i];
+
+										<tr style="cursor:default">
+
+											<td class="align-middle text-center">@(index + i+1)</td>
+											<td class="align-middle getpurple dopointer" onclick="@("window.location.href='" + @Url.Action("NoteDetails", "Home", new { noteid = downloadedNote.downloadedNote.F_K_Note }) + "'");">@downloadedNote.downloadedNote.Title</td>
+											<td class="align-middle">@downloadedNote.downloadedNote.Category</td>
+											<td class="align-middle">@downloadedNote.emailid</td>
+
+											@{
+												if (downloadedNote.downloadedNote.SellPrice != 0)
+												{
+													<td class="align-middle">
+														Paid
+													</td>
+												}
+												else
+												{
+													<td class="align-middle">
+														Free
+													</td>
+												}
+											}
+
+											<td class="align-middle">$@downloadedNote.downloadedNote.SellPrice</td>
+											<td class="align-middle">@downloadedNote.downloadedNote.CreatedDate.Value.ToString("dd") @downloadedNote.downloadedNote.CreatedDate.Value.ToString("MMM") @downloadedNote.downloadedNote.CreatedDate.Value.ToString("yyyy"), @downloadedNote.downloadedNote.CreatedDate.Value.ToString("T")</td>
+											<td class="align-middle">
+												<img class="dopointer" src="~/Content/images/Dashboard/eye.png" alt="view" onclick="@("window.location.href='" + @Url.Action("NoteDetails","Home",new {noteid=downloadedNote.downloadedNote.F_K_Note})+"'");">
+											</td>
+											<td class="align-middle">
+												<div class="dropdown dopointer">
+													<a id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														<i class="fa fa-ellipsis-v  dowhite"></i>
+													</a>
+													<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+														<a class="dropdown-item" href="@Url.Action("DownloadedNote","Home",new { downloadid = downloadedNote.downloadedNote.F_K_Note, pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"], shorthead = Request.QueryString["shorthead"] })">Download Note</a>
+														<a class="dropdown-item" onclick="AddReviews('@downloadedNote.downloadedNote.F_K_Note')" data-toggle="modal" data-target="#exampleModal">Add Reviews/Feedback</a>
+														<a class="dropdown-item" onclick="AddReviews('@downloadedNote.downloadedNote.F_K_Note')" data-toggle="modal" data-target="#exampleModal1">Report as Inappropriate</a>
+													</div>
+												</div>
+											</td>
+											<td></td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<script>
+			function AddReviews(id) {
+				document.getElementById("bookid").setAttribute("value", id);
+				document.getElementById("bookid2").setAttribute("value", id);
+			}
+		</script>
+
+		<!-- Feedback Modal -->
+		<div class="modal fade modal-download" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="modal-content">
+							<div class="modal-header">
+								<a class="close" data-dismiss="modal" aria-label="Close">
+									<img src="~/Content/images/Notes Details/close.png">
+								</a>
+							</div>
+							<div class="model-data">
+								<div class="model-head text-left">
+									<p>Add Review</p>
+								</div>
+								<form>
+									<div class="middel-content text-left">
+										<!-- Ratings -->
+										<div class="row">
+											<div class="col-12">
+												<div class="rate addhover">
+
+													<input type="radio" id="star5" name="feedback.Review" value="5" />
+													<label for="star5" title="5">5 stars</label>
+													<input type="radio" id="star4" name="feedback.Review" value="4" />
+													<label for="star4" title="4">4 stars</label>
+													<input type="radio" id="star3" name="feedback.Review" value="3" />
+													<label for="star3" title="3">3 stars</label>
+													<input type="radio" id="star2" name="feedback.Review" value="2" />
+													<label for="star2" title="2">2 stars</label>
+													<input type="radio" id="star1" name="feedback.Review" value="1" />
+													<label for="star1" title="1">1 star</label>
+												</div>
+											</div>
+										</div>
+
+										<input id="bookid" hidden name="feedback.F_K_Note" />
+										<input value="@Request.QueryString["pageindex"]" name="pageindex" hidden />
+										<input value="@Request.QueryString["search"]" name="search" hidden />
+										<input value="@Request.QueryString["shorthead"]" name="shorthead" hidden />
+
+										<div class="row">
+											<div class="col-12">
+												<div class="form-group">
+													<div class="textarea-input">
+														<label class="mylabel" for="InputEmail1">Comments *</label>
+														@Html.TextAreaFor(m => m.feedback.Comments, new { @placeholder = "Comments...", @class = "form-control InputEmail1" })
+														@Html.ValidationMessageFor(m => m.feedback.Comments)
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>submit</b></button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Feedback Modal End -->
+
+		<!-- Report Modal -->
+		<div class="modal fade modal-download" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="modal-content">
+							<div class="modal-header">
+								<a class="close" data-dismiss="modal" aria-label="Close">
+									<img src="~/Content/images/Notes Details/close.png">
+								</a>
+							</div>
+							<div class="model-data">
+								<div class="model-head text-left">
+									<p>Report an issue</p>
+								</div>
+								<form>
+									<div class="middel-content text-left">
+										
+										<input hidden id="bookid2" name="spamReport.F_K_Note" />
+										<input value="@Request.QueryString["pageindex"]" name="pageindex" hidden />
+										<input value="@Request.QueryString["search"]" name="search" hidden />
+										<input value="@Request.QueryString["shorthead"]" name="shorthead" hidden />
+
+										<div class="row">
+											<div class="col-12">
+												<div class="form-group">
+													<div class="textarea-input">
+														<label class="mylabel" for="InputEmail1">Remarks *</label>
+														@Html.TextAreaFor(m => m.spamReport.Remark, new { @placeholder = "Remarks...", @class = "form-control InputEmail1" })
+														@Html.ValidationMessageFor(m => m.spamReport.Remark)
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-12">
+												<button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>submit</b></button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Report Modal End -->
+		<!-- Pagination -->
+		<section id="pagination">
+			@Html.PagedListPager(Model.downloadRequests, pageindex => Url.Action("DownloadedNote", "Home", new { pageindex, search = Request.QueryString["search"], shorthead = Request.QueryString["shorthead"] }), new PagedList.Mvc.PagedListRenderOptions
+	   {
+		   ContainerDivClasses = null,
+		   LiElementClasses = new string[] { "page-item1" },
+		   UlElementClasses = new string[] { "pagination justify-content-center" },
+		   LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
+		   LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>",
+		   MaximumPageNumbersToDisplay = 5,
+		   DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+		   DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+		   DisplayLinkToLastPage = PagedListDisplayMode.Never
+
+	   })
+		</section>
+	</div>
+</section>

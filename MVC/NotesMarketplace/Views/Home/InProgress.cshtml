@@ -1,0 +1,107 @@
+﻿@model IPagedList<NotesMarketplace.NotesDetail>
+@using PagedList
+@using PagedList.Mvc
+<section id="dashboard-second-section">
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-6">
+                    <h3>In Progress Notes</h3>
+                </div>
+                <div class="col-12 col-sm-12 col-md-8 col-lg-6">
+                    <div class="row justify-content-end">
+                        <div class="wrapper">
+                            <img src="~/Content/images/Dashboard/search.jpg" class="searchimage doup">
+                            <input name="search_progress" value="@Request.QueryString["search_progress"]" aria-describedby="null" class="abcd form-control search-bar InputEmail1" placeholder="Search">
+                            <input type="hidden" name="field" value="@Request.QueryString["field"]" />
+                        </div>
+                        <div class="marge-left">
+                            <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>Search</b></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="grid-table table-responsive-xl">
+                    <table class="table">
+                        <thead>
+                            <tr style="cursor:default">
+
+                                <th scope="col" class="align-middle" onclick="@("window.location.href='" + @Url.Action("Dashboard", "Home", new { field = "datetime",search_progress=Request.QueryString["search_progress"],pageindex=Request.QueryString["pageindex"], search_progress_2 = Request.QueryString["search_progress_2"], pageindex_2 = Request.QueryString["pageindex_2"]}) + "'");">ADDED DATE</th>
+                                <th scope="col" class="align-middle" onclick="@("window.location.href='" + @Url.Action("Dashboard", "Home", new { field = "title",search_progress=Request.QueryString["search_progress"],pageindex=Request.QueryString["pageindex"], search_progress_2 = Request.QueryString["search_progress_2"], pageindex_2 = Request.QueryString["pageindex_2"] }) + "'");">TITLE</th>
+                                <th scope="col" class="align-middle" onclick="@("window.location.href='" + @Url.Action("Dashboard", "Home", new { field = "category" ,search_progress=Request.QueryString["search_progress"],pageindex=Request.QueryString["pageindex"], search_progress_2 = Request.QueryString["search_progress_2"], pageindex_2 = Request.QueryString["pageindex_2"]}) + "'");">CATEGORY</th>
+                                <th scope="col" class="align-middle" onclick="@("window.location.href='" + @Url.Action("Dashboard", "Home", new { field = "status" ,search_progress=Request.QueryString["search_progress"],pageindex=Request.QueryString["pageindex"], search_progress_2 = Request.QueryString["search_progress_2"], pageindex_2 = Request.QueryString["pageindex_2"]}) + "'");">STATUS</th>
+                                <th scope="col" class="align-middle">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count() == 0)
+                            {
+                                <tr> <td colspan="5" class="align-middle"> Records not found </td></tr>
+                            }
+                            @{
+                                foreach (var mynotes in Model)
+                                {
+                                    var getlist_code = ViewBag.status as IEnumerable<NotesMarketplace.NotesStatu>;
+                                    <tr style="cursor:default">
+                                        <td class="align-middle">@mynotes.CreatedDate.Value.ToShortDateString()</td>
+                                        <td class="align-middle">@mynotes.Title</td>
+                                        <td class="align-middle">@mynotes.Category</td>
+                                        @foreach (var item in getlist_code)
+                                        {
+                                            if (item.P_K_NotesStatus == mynotes.F_K_NoteStatus)
+                                            {
+                                                <td class="align-middle">@item.Name</td>
+                                            }
+                                        }
+
+                                        @if (@mynotes.F_K_NoteStatus == 1)
+                                        {
+                                            <td class="align-middle">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 dopointer">
+                                                        <img src="~/Content/images/Dashboard/edit.png" alt="Edit" onclick="@("window.location.href='" + @Url.Action("AddNotes", "Home", new {note_edit=mynotes.P_K_Note.ToString() }) + "'");">
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                                                        <i class="fa fa-trash dowhite dobig dopointer" onclick="@("window.location.href='" + @Url.Action("Dashboard", "Home", new { note_delete = mynotes.P_K_Note.ToString()}) + "'");"></i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="align-middle">
+                                                <div class="row text-center">
+                                                    <div class="col-11 col-sm-11 col-md-9 col-lg-7 dopointer">
+                                                        <img src="~/Content/images/Dashboard/eye.png" alt="Edit" class="img-fluid dopointer" onclick="@("window.location.href='" + @Url.Action("NoteDetails","Home",new {noteid=mynotes.P_K_Note})+"'");">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Pagination -->
+<section id="pagination">
+    @Html.PagedListPager(Model, pageindex => Url.Action("Dashboard", "Home", new { pageindex, field = Request.QueryString["field"], search_progress = Request.QueryString["search_progress"], field_2 = Request.QueryString["field_2"], search_progress_2 = Request.QueryString["search_progress_2"] }), new PagedList.Mvc.PagedListRenderOptions
+{
+    ContainerDivClasses = null,
+    LiElementClasses = new string[] { "page-item1" },
+    UlElementClasses = new string[] { "pagination justify-content-center" },
+    LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
+    LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>",
+    MaximumPageNumbersToDisplay = 5,
+    DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+    DisplayLinkToLastPage = PagedListDisplayMode.Never
+
+})
+</section>

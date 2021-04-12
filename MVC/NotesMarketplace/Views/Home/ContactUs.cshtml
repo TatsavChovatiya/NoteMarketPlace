@@ -1,0 +1,99 @@
+﻿@model NotesMarketplace.Models.ContactUs
+
+@{
+    ViewBag.activelink_contactus = "active-link";
+    ViewBag.Title = "Contact Us";
+    if (ViewBag.IsValid == "true")
+    {
+        Layout = "~/Views/Shared/Register.cshtml";
+        ViewBag.IsValid = null;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Non_Register.cshtml";
+    }
+}
+
+
+<section class="setfooter">
+    <!-- First Section -->
+    <section>
+        <div id="user-profile-img">
+            <div class="centerh2">
+
+                <h2>Contact Us</h2>
+
+            </div>
+        </div>
+    </section>
+
+    <form class="user-details-form" method="post">
+
+        <!-- Second Section -->
+        <section id="basic-profile-details" class="user-profile  contact-us content-box-md">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="head">
+                            <h3>Get In Touch</h3>
+                            <label class="mylabel">Let us know how to get back to you</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        
+                        <div class="form-group">
+                            <label class="mylabel">Full Name *</label>
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control InputEmail1", @placeholder = "Enter your full name", @maxlength="50"})
+                            @Html.ValidationMessageFor(m => m.FullName)
+                        </div>
+                      
+                        <div class="form-group">
+                            <label class="mylabel">Email Address *</label>
+                            @{
+                                if (ViewBag.Email_Disable == "true")
+                                {
+                                    @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control InputEmail1", @placeholder = "Enter your email address", @maxlength = "50", @readonly = "readonly" })
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control InputEmail1", @placeholder = "Enter your email address", @maxlength = "50" })
+                                }
+                            }
+
+                            @Html.ValidationMessageFor(m => m.EmailId)
+                        </div>
+                       
+                        <div class="form-group">
+                            <label class="mylabel">Subject *</label>
+                            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control InputEmail1", @placeholder = "Enter your subject", @maxlength = "100" })
+                            @Html.ValidationMessageFor(m => m.Subject)
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <div class="textarea-input">
+                                <label class="mylabel" for="InputEmail1">Comments/Questions *</label>
+                                @Html.TextAreaFor(m => m.Comments, new { @class = "form-control InputEmail1", @placeholder = "Comments..." ,})
+                                @Html.ValidationMessageFor(m => m.Comments)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-6">
+                        <button type="submit" class="btn btn-primary btn-block login-btn text-uppercase text-center" id="mybtn"><b>submit</b></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+    <!-- Second Section Ends-->
+</section>
+
+
+
+

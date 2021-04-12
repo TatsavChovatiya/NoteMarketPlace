@@ -1,0 +1,277 @@
+﻿@model NotesMarketplace.Models.SearchPageModel
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.activelink_search = "active-link";
+    ViewBag.Title = "Search";
+    ViewBag.activelink = "active-link";
+    if (ViewBag.IsValid == "true")
+    {
+        Layout = "~/Views/Shared/Register.cshtml";
+        ViewBag.IsValid = null;
+    }
+    else
+    {
+        Layout = "~/Views/Shared/Non_Register.cshtml";
+    }
+
+}
+<section class="setfooter">
+    <!-- First Section -->
+    <section>
+        <div id="user-profile-img">
+            <div class="centerh2">
+                <h2>Search Notes</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Second Section -->
+    <section id="search-page-second-section" class="content-box-md">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Search and Filter notes</h3>
+                </div>
+            </div>
+            <div class="filter-part">
+                <div class="filter-part2">
+                    <div class="row first-input">
+                        <div class="col-md-12">
+                            <div class="wrapper">
+                                <img src="~/Content/images/Dashboard/search.jpg" class="searchimage">
+                                <form>
+                                    <input name="search" value="@Request.QueryString["search"]" class="form-control search-bar InputEmail1" placeholder=" Search notes here...">
+                                    <input name="type" hidden value="@Request.QueryString["type"]" />
+                                    <input name="category" hidden value="@Request.QueryString["category"]" />
+                                    <input name="university" hidden value="@Request.QueryString["university"]" />
+                                    <input name="course" hidden value="@Request.QueryString["course"]" />
+                                    <input name="rating" hidden value="@Request.QueryString["rating"]" />
+                                    <input name="country" hidden value="@Request.QueryString["country"]" />
+                                    <input type="submit" hidden />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="row removeall">
+                        <div class=" col-lg-4 col-xl-2">
+                            <select name="type" class="form-control inputselect" onchange="location.href=this.value">
+                                @{
+                                    <option value="@Url.Action("Search", "Home", new { type = "", category = Request.QueryString["category"], university = Request.QueryString["university"], course = Request.QueryString["course"], country = Request.QueryString["country"], rating = Request.QueryString["rating"], search = Request.QueryString["search"] })">Select type</option>
+                                }
+                                @foreach (String type in Model.my_Dropdown.types)
+                                {
+                                    if (Request.QueryString["type"] != null)
+                                    {
+                                        if (Request.QueryString["type"].Equals(type))
+                                        {
+                                        <option selected value="@Url.Action("Search", "Home", new { type = type, category = Request.QueryString["category"], university = Request.QueryString["university"], course = Request.QueryString["course"], country = Request.QueryString["country"], rating = Request.QueryString["rating"], search = Request.QueryString["search"] })">@type</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option value="@Url.Action("Search", "Home", new { type = type, category = Request.QueryString["category"], university = Request.QueryString["university"], course = Request.QueryString["course"], country = Request.QueryString["country"], rating = Request.QueryString["rating"], search = Request.QueryString["search"] })">@type</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class=" col-lg-4 col-xl-2">
+                            <select name="category" class="form-control inputselect" onchange="location.href=this.value">
+                                @{
+                                    <option value="@Url.Action("Search", "Home", new { category = "", type = Request.QueryString["type"], university = Request.QueryString["university"], course = Request.QueryString["course"], country = Request.QueryString["country"], rating = Request.QueryString["rating"], search = Request.QueryString["search"] })">Select category</option>
+
+                                }
+                                @foreach (String category in Model.my_Dropdown.categories)
+                                {
+                                    if (Request.QueryString["category"] != null)
+                                    {
+                                        if (Request.QueryString["category"].Equals(category))
+                                        {
+                                            <option selected value="@Url.Action("Search", "Home", new { category = category, type = Request.QueryString["type"], university = Request.QueryString["university"], course = Request.QueryString["course"], country = Request.QueryString["country"], rating = Request.QueryString["rating"], search = Request.QueryString["search"] })">@category</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option value="@Url.Action("Search", "Home", new { category = category, type = Request.QueryString["type"], university = Request.QueryString["university"], course = Request.QueryString["course"], country = Request.QueryString["country"], rating = Request.QueryString["rating"], search = Request.QueryString["search"] })">@category</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-xl-2 col-lg-4">
+                            <select name="university" class="form-control inputselect" onchange="location.href=this.value">
+                                @{
+                                    <option value="@Url.Action("Search", "Home", new { university = "", type = Request.QueryString["type"], category = Request.QueryString["category"], course = Request.QueryString["course"], country = Request.QueryString["country"], rating = Request.QueryString["rating"], search = Request.QueryString["search"] })">Select university</option>
+
+                                }
+                                @foreach (String university in Model.my_Dropdown.universities)
+                                {
+                                    if (Request.QueryString["university"] != null)
+                                    {
+                                        if (Request.QueryString["university"].Equals(university))
+                                        {
+                                            <option selected value="@Url.Action("Search", "Home", new {university=university, type=Request.QueryString["type"],category=Request.QueryString["category"],course=Request.QueryString["course"],country=Request.QueryString["country"],rating=Request.QueryString["rating"], search = Request.QueryString["search"]})">@university</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option value="@Url.Action("Search", "Home", new {university=university, type=Request.QueryString["type"],category=Request.QueryString["category"],course=Request.QueryString["course"],country=Request.QueryString["country"],rating=Request.QueryString["rating"], search = Request.QueryString["search"]})">@university</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-xl-2 col-lg-4">
+                            <select name="course" class="form-control inputselect" onchange="location.href=this.value">
+                                @{
+                                    <option value="@Url.Action("Search", "Home", new {course="", type=Request.QueryString["type"],category=Request.QueryString["category"],university=Request.QueryString["university"],country=Request.QueryString["country"],rating=Request.QueryString["rating"], search = Request.QueryString["search"]})">Select course</option>
+
+                                }
+                                @foreach (String course in Model.my_Dropdown.courses)
+                                {
+                                    if (Request.QueryString["course"] != null)
+                                    {
+                                        if (Request.QueryString["course"].Equals(course))
+                                        {
+                                            <option selected value="@Url.Action("Search", "Home", new {course=course, type=Request.QueryString["type"],category=Request.QueryString["category"],university=Request.QueryString["university"],country=Request.QueryString["country"],rating=Request.QueryString["rating"], search = Request.QueryString["search"]})">@course</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option value="@Url.Action("Search", "Home", new {course=course, type=Request.QueryString["type"],category=Request.QueryString["category"],university=Request.QueryString["university"],country=Request.QueryString["country"],rating=Request.QueryString["rating"], search = Request.QueryString["search"]})">@course</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-xl-2 col-lg-4">
+                            <select name="country" class="form-control inputselect" onchange="location.href=this.value">
+                                @{
+                                    <option value="@Url.Action("Search", "Home", new {country="", type=Request.QueryString["type"],category=Request.QueryString["category"],university=Request.QueryString["university"],course=Request.QueryString["course"],rating=Request.QueryString["rating"], search = Request.QueryString["search"]})">Select country</option>
+
+                                }
+                                @foreach (String country in Model.my_Dropdown.countries)
+                                {
+                                    if (Request.QueryString["country"] != null)
+                                    {
+                                        if (Request.QueryString["country"].Equals(country))
+                                        {
+                                            <option selected value="@Url.Action("Search", "Home", new {country=country, type=Request.QueryString["type"],category=Request.QueryString["category"],university=Request.QueryString["university"],course=Request.QueryString["course"],rating=Request.QueryString["rating"], search = Request.QueryString["search"]})">@country</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option value="@Url.Action("Search", "Home", new {country=country, type=Request.QueryString["type"],category=Request.QueryString["category"],university=Request.QueryString["university"],course=Request.QueryString["course"],rating=Request.QueryString["rating"], search = Request.QueryString["search"]})">@country</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-xl-2 col-lg-4">
+                            <select name="rating" class="form-control inputselect" onchange="location.href=this.value">
+                                <option value="@Url.Action("Search", "Home", new {rating="", type=Request.QueryString["type"],category=Request.QueryString["category"],university=Request.QueryString["university"],course=Request.QueryString["course"],country=Request.QueryString["country"],search = Request.QueryString["search"]})">Select rating</option>
+                                @{
+                                    for (int i = 0; i < 5; i++)
+                                    {
+                                        if (Request.QueryString["rating"] != null)
+                                        {
+                                            if (Request.QueryString["rating"].Equals((i + 1).ToString()))
+                                            {
+                                                <option selected value="@Url.Action("Search", "Home", new {rating=(i+1).ToString(), type=Request.QueryString["type"],category=Request.QueryString["category"],university=Request.QueryString["university"],course=Request.QueryString["course"],country=Request.QueryString["country"],search = Request.QueryString["search"]})">@(i+1)</option>
+                                                continue;
+                                            }
+                                        }
+                                        <option value="@Url.Action("Search", "Home", new {rating=(i+1).ToString(), type=Request.QueryString["type"],category=Request.QueryString["category"],university=Request.QueryString["university"],course=Request.QueryString["course"],country=Request.QueryString["country"],search = Request.QueryString["search"]})">@(i+1)</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="search-page-third-section" class="content-box-md">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Total <span>@Model.count</span> notes</h3>
+                </div>
+            </div>
+            <div class="row">
+
+                @foreach (NotesMarketplace.Models.My_Search book in Model.mysearch)
+                {
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4">
+                        <div class="book-info dopointer" onclick="@("window.location.href='" + @Url.Action("NoteDetails", "Home", new { noteid = book.mynote.P_K_Note.ToString(),}) + "'");">
+                            <!-- Book image -->
+                            @if (book.mynote.BookPicture != null)
+                            {
+                                <img src="~/Uploads/BookPicture/@book.mynote.BookPicture" alt="Books" class="img-fluid">
+                            }
+                            else
+                            {
+                                <img src="~/Uploads/BookPicture/Default.png" alt="Books" class="img-fluid">
+                            }
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <div class="book-info-content">
+
+                                            <!-- Book title -->
+                                            <div class="book-title">
+                                                <h6 class="dopointer">@book.mynote.Title</h6>
+                                            </div>
+                                            
+                                            
+                                            <!-- Sub Info -->
+                                            <div class="sub-info ">
+
+                                                <p class="sub-text dopointer"><i class="fa fa-university"></i>@book.mynote.InstitutionName,@book.mynote.Country</p>
+                                                <p class="sub-text dopointer"><i class="fa fa-book"></i> @book.mynote.NumberOfPages Pages</p>
+                                                <p class="sub-text dopointer"><i class="fa fa-calendar"></i> @book.mynote.CreatedDate.Value.ToString("ddd"), @book.mynote.CreatedDate.Value.ToString("MMM") @book.mynote.CreatedDate.Value.ToString("yyyy")</p>
+                                                <p class="inappropriate-mark dopointer"><i class="fa fa-flag"></i><span> @book.spam Users marked this note inappropriate</span></p>
+                                                
+                                            </div>
+
+                                            <!-- Ratings -->
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-7 col-xl-7 col-lg-6 vvv">
+                                                    <div class="rate">
+
+                                                        @for (double i = 0; i <(5-book.avg); i++)
+                                                        {
+                                                            <label></label>
+                                                        }
+                                                        @for (double i = 0; i <book.avg; i++)
+                                                        {
+                                                            <label  class="dorate"></label>
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-5 col-xl-4 col-lg-6 myreview">
+                                                    <div class="review-text align-middle">
+                                                        <p class="clearmar dopointer">@book.reviews reviews</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- Pagination -->
+    <section id="pagination">
+        @Html.PagedListPager(Model.mysearch, pageindex => Url.Action("Search", "Home", new { pageindex, search = Request.QueryString["search"] }), new PagedList.Mvc.PagedListRenderOptions
+    {
+       ContainerDivClasses = null,
+       LiElementClasses = new string[] { "page-item1" },
+       UlElementClasses = new string[] { "pagination justify-content-center" },
+       LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
+       LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>",
+       MaximumPageNumbersToDisplay = 5,
+       DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+       DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+       DisplayLinkToLastPage = PagedListDisplayMode.Never
+
+    })
+    </section>
+</section>
