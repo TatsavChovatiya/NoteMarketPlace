@@ -89,16 +89,9 @@
 
                         <li class="nav-item">
                             <div class="userprofile-user-icon dropdown">
-                                @{
-                                    if (ViewBag.ProfilePicture != null)
-                                    {
-                                        <a class="dopointer" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/Uploads/ProfilePicture/@ViewBag.ProfilePicture" class="img-fluid rounded-circle" alt="User"></a>
-                                    }
-                                    else
-                                    {
-                                        <a class="dopointer" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/Uploads/ProfilePicture/Default.png" class="img-fluid rounded-circle" alt="User"></a>
-                                    }
-                                }
+                                  
+                                <a class="dopointer" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/Uploads/ProfilePicture/@NotesMarketplace.MyClass.Register_id.profilepicture" class="img-fluid rounded-circle" alt="User"></a>
+                                    
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="@Url.Action("UserProfile", "Home")">My Profile</a>
                                     <a class="dropdown-item" href="@Url.Action("DownloadedNote", "Home")">My Downloads</a>
@@ -140,16 +133,8 @@
                             </li>
                             <li>
                                 <div class="dropdown dowhiteonhower">
-                                    @{
-                                        if (ViewBag.ProfilePicture != null)
-                                        {
-                                            <a id="dropdownMenuLink" class="dopointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/Uploads/ProfilePicture/@ViewBag.ProfilePicture" class="img-fluid rounded-circle" alt="User"></a>
-                                        }
-                                        else
-                                        {
-                                            <a id="dropdownMenuLink" class="dopointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/Uploads/ProfilePicture/Default.png" class="img-fluid rounded-circle" alt="User"></a>
-                                        }
-                                    }
+                                  
+                                    <a id="dropdownMenuLink" class="dopointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/Uploads/ProfilePicture/@NotesMarketplace.MyClass.Register_id.profilepicture" class="img-fluid rounded-circle" alt="User"></a>
                                     <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink">
                                         <div class="col-12"><a class="dropdown-item" href="@Url.Action("UserProfile", "Home")">My Profile</a></div>
                                         <div class="col-12"><a class="dropdown-item" href="@Url.Action("DownloadedNote", "Home")">My Downloads</a></div>

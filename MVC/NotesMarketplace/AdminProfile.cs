@@ -11,18 +11,31 @@ namespace NotesMarketplace
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
     public partial class AdminProfile
     {
         public int ID { get; set; }
         public int F_K_User { get; set; }
+
+        [Phone]
         public string PhoneNumber { get; set; }
+
+        [Display(Name = "Phonenumber")]
+        [Phone]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Enter valid phonenumber")]
+        public string Number { get; set; }
+
+        public string CountryCode { get; set; }
+
+        public HttpPostedFileBase PP { get; set; }
         public string ProfilePicture { get; set; }
         public string SecondaryEmail { get; set; }
         public bool IsActive { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
-    
+
         public virtual User User { get; set; }
     }
 }

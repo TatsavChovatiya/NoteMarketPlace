@@ -3,7 +3,7 @@
 @{
     ViewBag.activelink_faq = "active-link";
     ViewBag.Title = "FAQ";
-    if (ViewBag.IsValid == "true")
+    if (NotesMarketplace.MyClass.Register_id.id != 0)
     {
         Layout = "~/Views/Shared/Register.cshtml";
         ViewBag.IsValid = null;

@@ -1,0 +1,59 @@
+﻿@model NotesMarketplace.ManageCTC
+@{
+    ViewBag.title = "Add Country";
+    ViewBag.managepage = "active-link";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+}
+
+<form class="user-details-form" method="post">
+
+    <!-- Second Section -->
+    <section id="basic-profile-details" class="user-profile content-box-md">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="head">
+                            <h3>Add Country</h3>
+                        </div>
+                    </div>
+                </div>
+                <input hidden name="ID" value="@Model.ID" />
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="row">
+
+                            <div class="col-12">
+                                <!-- First Name -->
+                                <div class="form-group">
+                                    <label class="mylabel">Country Name *</label>
+                                    @Html.TextBoxFor(m => m.Value, new { @class = "form-control InputEmail1", @placeholder = "Enter your Country Name", @maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.Value)
+                                </div>
+                            </div>
+                        </div>
+                        <input hidden name="Description" value="dummy des"/>
+                        <!-- Upload a Picture -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="textarea-input">
+                                        <label class="mylabel" for="InputEmail1">Country Code *</label>
+                                        @Html.TextBoxFor(m => m.CountryCode, new { @class = "form-control InputEmail1", @placeholder = "Enter Country Code", @maxlength = "10",@required="required", @type = "number" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-5 col-md-4">
+                                <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>submit</b></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Second Section Ends-->
+</form>

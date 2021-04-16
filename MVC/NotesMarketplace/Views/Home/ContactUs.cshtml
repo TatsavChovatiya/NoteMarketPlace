@@ -3,7 +3,7 @@
 @{
     ViewBag.activelink_contactus = "active-link";
     ViewBag.Title = "Contact Us";
-    if (ViewBag.IsValid == "true")
+    if (NotesMarketplace.MyClass.Register_id.id != 0)
     {
         Layout = "~/Views/Shared/Register.cshtml";
         ViewBag.IsValid = null;

@@ -1,0 +1,128 @@
+﻿@model SystemConfiguration
+@{
+    ViewBag.title = "Manage System Configuration";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+    ViewBag.managepage = "active-link";
+}
+
+<form class="user-details-form" method="post" enctype="multipart/form-data">
+
+    <!-- Second Section -->
+    <section id="basic-profile-details" class="user-profile content-box-md">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="head">
+                            <h3>Manage System Configuration</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="row">
+
+                            <div class="col-12">
+                                <!-- First Name -->
+                                <div class="form-group">
+                                    <label class="mylabel">Support emails address *</label>
+                                    @Html.TextBoxFor(m=>m.EmaillId1,new {@class="form-control InputEmail1", @placeholder="Enter Support email address",@maxlength="100" })
+                                    @Html.ValidationMessageFor(m=>m.EmaillId1)
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <!-- Last Name -->
+                                <div class="form-group">
+                                    <label class="mylabel" for="InputEmail1">Support phone number *</label>
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control InputEmail1", @placeholder = "Enter phone number", @maxlength = "15" })
+                                    @Html.ValidationMessageFor(m => m.PhoneNumber)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-12">
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label class="mylabel" for="InputEmail1">Email Address(es)(for various events system will send notification to these users) *</label>
+                                    @Html.TextBoxFor(m => m.EmailId2, new { @class = "form-control InputEmail1", @placeholder = "Enter email address", @maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.EmailId2)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Gender -->
+                                <div class="form-group">
+                                    <label class="mylabel">Facebook URL</label>
+                                    @Html.TextBoxFor(m => m.FacebookUrl, new { @class = "form-control InputEmail1", @placeholder = "Enter facebook url", @maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.FacebookUrl)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Gender -->
+                                <div class="form-group">
+                                    <label class="mylabel">Twitter URL</label>
+                                    @Html.TextBoxFor(m => m.TwitterUrl, new { @class = "form-control InputEmail1", @placeholder = "Enter twitter url", @maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.TwitterUrl)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Gender -->
+                                <div class="form-group">
+                                    <label class="mylabel">Linkedin URL</label>
+                                    @Html.TextBoxFor(m => m.LinkInUrl, new { @class = "form-control InputEmail1", @placeholder = "Enter linkedin url", @maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.LinkInUrl)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upload a Picture -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="upload-profile-picture">
+                                        <label class="mylabel" for="InputEmail1">Default image for notes(if seller do not upload)</label>
+                                        <input type="file" accept="image/*" name="DNP" class="form-control InputEmail1">
+                                        <div class="uploadmypic text-center">
+                                            <img class="img-fluid" src="~/Admin_Content/images/user-profile/upload.png">
+                                            <h6>Upload a picture</h6>
+                                        </div>
+                                        <span class="field-validation-error">@ViewBag.DNP</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="upload-profile-picture">
+                                        <label class="mylabel" for="InputEmail1">Default profile picture(if seller do not upload)</label>
+                                        <input type="file" accept="image/*" name="DPP" class="form-control InputEmail1">
+                                        <div class="uploadmypic text-center">
+                                            <img class="img-fluid" src="~/Admin_Content/images/user-profile/upload.png">
+                                            <h6>Upload a picture</h6>
+                                        </div>
+                                    </div>
+                                    <span class="field-validation-error">@ViewBag.DPP</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>submit</b></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Second Section Ends-->
+</form>

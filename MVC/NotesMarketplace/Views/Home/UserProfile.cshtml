@@ -174,19 +174,10 @@
 
                                                 <input type="file" name="File" accept="image/*" class="form-control InputEmail1"/>
                                                 <div class="uploadmypic text-center">
-
-                                                    @if (ViewBag.ProfilePicture != null)
-                                                    {
-                                                        <img class="img-fluid" src ="~/Uploads/ProfilePicture/@ViewBag.ProfilePicture">
-                                                    }
-                                                    else
-                                                    {
-                                                        <img class="img-fluid" src="~/Content/images/user-profile/upload.png">
-                                                    }
-
+                                                    <img class="img-fluid" src="~/Content/images/user-profile/upload.png">
                                                     <h6>Upload a picture</h6>
                                                 </div>
-                                                <span class="field-validation-error">@ViewBag.ProfilePicture</span>
+                                                <span class="field-validation-error">@NotesMarketplace.MyClass.Register_id.profilepicture</span>
                                             </div>
                                         </div>
                                     </div>

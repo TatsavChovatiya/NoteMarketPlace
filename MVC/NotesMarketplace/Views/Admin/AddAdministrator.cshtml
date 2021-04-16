@@ -1,0 +1,115 @@
+﻿@model AdminProfile
+@{
+    ViewBag.title = "Add Administrator";
+    ViewBag.managepage = "active-link";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+}
+
+<form class="user-details-form" method="post">
+
+    <!-- Second Section -->
+    <section id="basic-profile-details" class="user-profile content-box-md">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="head">
+                            @if (Model.ID != 0)
+                            {
+                                <h3>Edit Administrator</h3>
+                            }
+                            else
+                            {
+                                <h3>Add Administrator</h3>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="row">
+
+                            <div class="col-12">
+                                <!-- First Name -->
+                                <div class="form-group">
+                                    <label class="mylabel">Full Name *</label>
+                                    @Html.TextBoxFor(m => m.User.FirstName, new { @class = "form-control InputEmail1", @placeholder = "Enter your First Name", @maxlength = "50" })
+                                    @Html.ValidationMessageFor(m => m.User.FirstName)
+                                </div>
+
+                            </div>
+                            <div class="col-12">
+                                <!-- Last Name -->
+                                <div class="form-group">
+                                    <label class="mylabel" for="InputEmail1">Last Name *</label>
+                                    @Html.TextBoxFor(m => m.User.LastName, new { @class = "form-control InputEmail1", @placeholder = "Enter your Last Name", @maxlength = "50" })
+                                    @Html.ValidationMessageFor(m => m.User.LastName)
+                                </div>
+
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="mylabel" for="InputEmail1">Email *</label>
+                                    @Html.TextBoxFor(m => m.User.EmailId, new { @class = "form-control InputEmail1", @placeholder = "Enter your Email Address", @maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.User.EmailId)
+                                    @{
+                                        if (ViewBag.flag == "Exits")
+                                        {
+                                            <span class="field-validation-error">This account has been already created.</span>
+                                        }
+                                    }
+                                </div>
+
+                            </div>
+                            <div class="col-12">
+                                <!-- Phone Number -->
+                                <div class="form-group">
+                                    <label class="mylabel">Phone Number</label>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3 col-3 col-xl-3 col-lg-4  nopadding">
+                                                <div class="marginright">
+                                                    <select name="CountryCode" class="form-control inputselect">
+                                                        @{
+                                                            var getlist_code = ViewBag.MyCTC as IEnumerable<NotesMarketplace.ManageCTC>;
+
+                                                            foreach (var item in getlist_code)
+                                                            {
+                                                                if (Model.CountryCode != null)
+                                                                {
+                                                                    if (item.CountryCode.ToString().Equals(Model.CountryCode.ToString().Substring(1)))
+                                                                    {
+                                                                            <option selected>+@item.CountryCode</option>
+                                                                        continue;
+                                                                    }
+                                                                }
+                                                                    <option>+@item.CountryCode</option>
+
+                                                                }
+                                                            }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 col-sm-9 col-9 col-xl-9 col-lg-8 nopadding">
+                                                @Html.TextBoxFor(m => m.Number, new { @class = "form-control InputEmail1", @placeholder = "Enter your phone number", @maxlength = "20" })
+                                            </div>
+                                            @Html.ValidationMessageFor(m => m.Number)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input hidden name="ID" value="@Model.ID"/>
+                        <div class="row">
+                            <div class="col-5 col-md-4">
+                                <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>submit</b></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- Second Section Ends-->
+</form>

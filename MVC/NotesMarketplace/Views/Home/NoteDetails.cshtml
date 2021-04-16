@@ -1,7 +1,7 @@
 ﻿@model NotesMarketplace.NotesDetail
 @{
     ViewBag.Title = "Note Details";
-    if (ViewBag.IsValid == "true")
+    if (NotesMarketplace.MyClass.Register_id.id != 0)
     {
         Layout = "~/Views/Shared/Register.cshtml";
         ViewBag.IsValid = null;
@@ -150,7 +150,15 @@
                                 {
                                     <h5>&nbsp;-&nbsp;</h5>
                                 }
-                                <h5>@Model.CreatedDate.Value.ToString("MMMM") @Model.CreatedDate.Value.ToString("dd") @Model.CreatedDate.Value.ToString("yyyy")</h5>
+                                @if (Model.PublishedDate == null)
+                                {
+                                    <h5>@Model.CreatedDate.Value.ToString("MMMM") @Model.CreatedDate.Value.ToString("dd") @Model.CreatedDate.Value.ToString("yyyy")</h5>
+                                }
+                                else
+                                {
+                                    <h5>@Model.PublishedDate.Value.ToString("MMMM") @Model.PublishedDate.Value.ToString("dd") @Model.PublishedDate.Value.ToString("yyyy")</h5>
+                                }
+
                                 <div class="rate-fa">
                                     @for (int i = 0; i < 5; i++)
                                     {

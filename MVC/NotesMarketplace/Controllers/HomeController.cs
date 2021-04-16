@@ -7,43 +7,27 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using NotesMarketplace.Models;
+using NotesMarketplace.MyClass;
 using PagedList;
 
 namespace NotesMarketplace.Controllers
 {
     public class HomeController : Controller
     {
-        static int userid = 0;
         static String route = null;
         private NotesMarketplaceEntities db = new NotesMarketplaceEntities();
 
         public ActionResult Home()
         {
             ViewBag.HomePage = "true";
-            if (userid != 0)
-            {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
-            }
             return View();
         }
 
-        public ActionResult AddNotes(String note_edit, String noteid)
+        public ActionResult AddNotes(String note_edit,String noteid)
         {
-            if (userid != 0)
+            if (Register_id.id != 0)
             {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
-
-                List<ManageCTC> manageCTCs = db.ManageCTCs.Where(m => m.IsActive == true).ToList();
+                List<ManageCTC> manageCTCs = db.ManageCTCs.Where(m=>m.IsActive==true).ToList();
                 ViewBag.MyCTC = manageCTCs;
 
                 if (note_edit != null)
@@ -104,9 +88,9 @@ namespace NotesMarketplace.Controllers
         [HttpPost]
         public ActionResult AddNotes(NotesDetail notesDetail)
         {
-            if (userid != 0)
+            if (Register_id.id != 0)
             {
-                List<ManageCTC> manageCTCs = db.ManageCTCs.Where(m => m.IsActive == true).ToList();
+                List<ManageCTC> manageCTCs = db.ManageCTCs.Where(m=>m.IsActive==true).ToList();
                 ViewBag.MyCTC = manageCTCs;
                 if (notesDetail != null)
                 {
@@ -130,9 +114,14 @@ namespace NotesMarketplace.Controllers
                         notesDetail.SellPrice = 0;
                         return View(notesDetail);
                     }
-                    notesDetail.F_K_User = userid;
+                    notesDetail.F_K_User = Register_id.id;
                     notesDetail.IsActive = true;
                     notesDetail.CreatedDate = DateTime.Now;
+                    
+                    if(notesDetail.Book_Picture==null && notesDetail.BookPicture==null)
+                    {
+                        notesDetail.BookPicture = db.SystemConfigurations.FirstOrDefault().DefaultProfilePicture;
+                    }
                     if (notesDetail.Book_Picture != null && (notesDetail.BookPicture == null))
                     {
                         if (notesDetail.Book_Picture.ContentLength > 1024 * 1024 * 10)
@@ -146,7 +135,7 @@ namespace NotesMarketplace.Controllers
                         var supportedTypes = new[] { ".jpg", ".jpeg", ".png" };
                         if (supportedTypes.Contains(extension.ToUpper()) || supportedTypes.Contains(extension.ToLower()))
                         {
-                            string fileName = userid.ToString() + DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss").Replace(" ", String.Empty).Replace("-", String.Empty).Replace(":", String.Empty) + extension; //+ DateTime.Now.ToString("G").Replace(" ", String.Empty).Replace("-", String.Empty).Replace(":", String.Empty) + extension;
+                            string fileName = Register_id.id.ToString() + DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss").Replace(" ", String.Empty).Replace("-", String.Empty).Replace(":", String.Empty) + extension;
                             notesDetail.Book_Picture.SaveAs(Path.Combine(path, fileName));
                             notesDetail.BookPicture = fileName;
                         }
@@ -164,7 +153,7 @@ namespace NotesMarketplace.Controllers
                         var supportedTypes = new[] { ".pdf" };
                         if (supportedTypes.Contains(extension.ToUpper()) || supportedTypes.Contains(extension.ToLower()))
                         {
-                            string fileName = userid.ToString() + DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss").Replace(" ", String.Empty).Replace("-", String.Empty).Replace(":", String.Empty) + extension;// + DateTime.Now.ToString("G").Replace(" ", String.Empty).Replace("-", String.Empty).Replace(":", String.Empty) + extension;
+                            string fileName = Register_id.id.ToString() + DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss").Replace(" ", String.Empty).Replace("-", String.Empty).Replace(":", String.Empty) + extension;
                             notesDetail.Note_Attachment.SaveAs(Path.Combine(path, fileName));
                             notesDetail.NoteAttachment = fileName;
                             notesDetail.NoteSize = notesDetail.Note_Attachment.ContentLength;
@@ -195,7 +184,7 @@ namespace NotesMarketplace.Controllers
                         var supportedTypes = new[] { ".pdf" };
                         if (supportedTypes.Contains(extension.ToUpper()) || supportedTypes.Contains(extension.ToLower()))
                         {
-                            string fileName = userid.ToString() + DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss").Replace(" ", String.Empty).Replace("-", String.Empty).Replace(":", String.Empty) + extension;// + DateTime.Now.ToString("G").Replace(" ", String.Empty).Replace("-", String.Empty).Replace(":", String.Empty) + extension;
+                            string fileName = Register_id.id.ToString() + DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss").Replace(" ", String.Empty).Replace("-", String.Empty).Replace(":", String.Empty) + extension;
                             notesDetail.Note_Preview.SaveAs(Path.Combine(path, fileName));
                             notesDetail.NotePreview = fileName;
                         }
@@ -210,21 +199,28 @@ namespace NotesMarketplace.Controllers
                     {
                         if (notesDetail.F_K_NoteStatus == 3 && notesDetail.P_K_Note == 0)
                         {
-                            User user = db.Users.FirstOrDefault(m => m.P_K_User == userid);
-                            MailMessage mail = new MailMessage("tatsav.chovatiya@gmail.com", user.EmailId.ToString());
-                            mail.Subject = user.FirstName + " " + user.LastName + " sent his note for review";
-                            string Body = "Hello Admins, \n\nWe want to inform you that, " + user.FirstName + " " + user.LastName + " sent his note " + notesDetail.Title + " for review.Please look at the notes and take required actions.\n\nRegards,\nNotes Marketplace";
-                            mail.Body = Body;
+                            User user = db.Users.FirstOrDefault(m => m.P_K_User == Register_id.id);
+                            try
+                            {
+                                MailMessage mail = new MailMessage(db.SystemConfigurations.FirstOrDefault().EmaillId1, user.EmailId.ToString());
+                                mail.Subject = user.FirstName + " " + user.LastName + " sent his note for review";
+                                string Body = "Hello Admins, \n\nWe want to inform you that, " + user.FirstName + " " + user.LastName + " sent his note " + notesDetail.Title + " for review.Please look at the notes and take required actions.\n\nRegards,\nNotes Marketplace";
+                                mail.Body = Body;
 
-                            SmtpClient smtp = new SmtpClient();
-                            smtp.Host = "smtp.gmail.com";
-                            smtp.Port = 587;
-                            smtp.UseDefaultCredentials = false;
+                                SmtpClient smtp = new SmtpClient();
+                                smtp.Host = "smtp.gmail.com";
+                                smtp.Port = 587;
+                                smtp.UseDefaultCredentials = false;
 
-                            NetworkCredential nc = new NetworkCredential("tatsav.chovatiya@gmail.com", "Tadpole@786");
-                            smtp.EnableSsl = true;
-                            smtp.Credentials = nc;
-                            smtp.Send(mail);
+                                NetworkCredential nc = new NetworkCredential(db.SystemConfigurations.FirstOrDefault().EmaillId1, "12345678dummy");
+                                smtp.EnableSsl = true;
+                                smtp.Credentials = nc;
+                                smtp.Send(mail);
+                            }
+                            catch
+                            {
+
+                            }
                         }
                     }
                     catch
@@ -234,11 +230,7 @@ namespace NotesMarketplace.Controllers
 
                     if (notesDetail.P_K_Note == 0)
                     {
-                        //notesDetail.BookPicture = "2101032021170448.PNG";
-                        //notesDetail.NoteAttachment= "2101032021144651.pdf";
-                        //notesDetail.NotePreview = "2127022021103745.pdf";
                         db.NotesDetails.Add(notesDetail);
-
                         db.SaveChanges();
                     }
                     else
@@ -287,7 +279,7 @@ namespace NotesMarketplace.Controllers
         [ChildActionOnly]
         public ActionResult Submitted(String field_2, String search_progress_2, int? pageindex_2)
         {
-            List<NotesDetail> mynotes = db.NotesDetails.Where(m => m.F_K_User == userid && (m.F_K_NoteStatus == 4) && m.IsActive).OrderByDescending(m => m.CreatedDate).ToList();
+            List<NotesDetail> mynotes = db.NotesDetails.Where(m => m.F_K_User == Register_id.id && (m.F_K_NoteStatus == 4) && m.IsActive).OrderByDescending(m => m.CreatedDate).ToList();
 
             if (!String.IsNullOrEmpty(field_2))
             {
@@ -303,7 +295,7 @@ namespace NotesMarketplace.Controllers
 
             if (search_progress_2 != null && search_progress_2.Length != 0)
             {
-                mynotes = mynotes.Where(m => m.F_K_User == userid && (m.Title.ToLower().StartsWith(search_progress_2.ToLower()) || m.Category.ToLower().StartsWith(search_progress_2.ToLower()))).ToList();
+                mynotes = mynotes.Where(m => m.F_K_User == Register_id.id && (m.Title.ToLower().StartsWith(search_progress_2.ToLower()) || m.Category.ToLower().StartsWith(search_progress_2.ToLower()))).ToList();
             }
             List<NotesStatu> notesStatus = db.NotesStatus.ToList();
             ViewBag.status = notesStatus;
@@ -313,7 +305,7 @@ namespace NotesMarketplace.Controllers
         [ChildActionOnly]
         public ActionResult InProgress(String field, String search_progress, String note_delete, int? pageindex)
         {
-            List<NotesDetail> mynotes = db.NotesDetails.Where(m => m.F_K_User == userid && (m.F_K_NoteStatus == 1 || m.F_K_NoteStatus == 2 || m.F_K_NoteStatus == 3) && m.IsActive).OrderByDescending(m => m.CreatedDate).ToList();
+            List<NotesDetail> mynotes = db.NotesDetails.Where(m => m.F_K_User == Register_id.id && (m.F_K_NoteStatus == 1 || m.F_K_NoteStatus == 2 || m.F_K_NoteStatus == 3) && m.IsActive).OrderByDescending(m => m.CreatedDate).ToList();
 
             if (note_delete != null)
             {
@@ -343,7 +335,7 @@ namespace NotesMarketplace.Controllers
 
             if (search_progress != null && search_progress.Length != 0)
             {
-                mynotes = mynotes.Where(m => m.F_K_User == userid && (m.Title.ToLower().StartsWith(search_progress.ToLower()) || m.Category.ToLower().StartsWith(search_progress.ToLower()) || m.NotesStatu.Name.ToLower().StartsWith(search_progress.ToLower()))).ToList();
+                mynotes = mynotes.Where(m => m.F_K_User == Register_id.id && (m.Title.ToLower().StartsWith(search_progress.ToLower()) || m.Category.ToLower().StartsWith(search_progress.ToLower()) || m.NotesStatu.Name.ToLower().StartsWith(search_progress.ToLower()))).ToList();
             }
 
             List<NotesStatu> notesStatus = db.NotesStatus.ToList();
@@ -354,27 +346,20 @@ namespace NotesMarketplace.Controllers
         public ActionResult Dashboard()
         {
             route = "Dashboard";
-            if (userid != 0)
+            if (Register_id.id != 0)
             {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
-
                 Statistic statistic = new Statistic();
                 List<DownloadedNote> downloadedNotes = db.DownloadedNotes.ToList();
 
-                statistic.BuyerRequests = downloadedNotes.Where(m => m.F_K_User_Seller == userid && m.IsActive && m.IsApproved == false).ToList().Count();
-                statistic.DownloadedNotes = downloadedNotes.Where(m => m.F_K_User_Buyer == userid && m.IsActive && m.IsApproved == true).ToList().Count();
-                statistic.PublishedNotes = db.NotesDetails.Where(m => m.IsActive && (m.F_K_NoteStatus == 4) && m.F_K_User == userid).ToList().Count();
-                statistic.RejectedNotes = db.NotesDetails.Where(m => m.IsActive && (m.F_K_NoteStatus == 5) && m.F_K_User == userid).ToList().Count();
-                statistic.SoldNotes = downloadedNotes.Where(m => m.F_K_User_Seller == userid && m.IsActive && m.IsApproved == true).ToList().Count();
-                statistic.UnderReviewNotes = db.NotesDetails.Where(m => m.IsActive && (m.F_K_NoteStatus == 2) && m.F_K_User == userid).ToList().Count();
+                statistic.BuyerRequests = downloadedNotes.Where(m => m.F_K_User_Seller == Register_id.id && m.IsActive && m.IsApproved == false).ToList().Count();
+                statistic.DownloadedNotes = downloadedNotes.Where(m => m.F_K_User_Buyer == Register_id.id && m.IsActive && m.IsApproved == true).ToList().Count();
+                statistic.PublishedNotes = db.NotesDetails.Where(m => m.IsActive && (m.F_K_NoteStatus == 4) && m.F_K_User == Register_id.id).ToList().Count();
+                statistic.RejectedNotes = db.NotesDetails.Where(m => m.IsActive && (m.F_K_NoteStatus == 5) && m.F_K_User == Register_id.id).ToList().Count();
+                statistic.SoldNotes = downloadedNotes.Where(m => m.F_K_User_Seller == Register_id.id && m.IsActive && m.IsApproved == true).ToList().Count();
+                statistic.UnderReviewNotes = db.NotesDetails.Where(m => m.IsActive && (m.F_K_NoteStatus == 2) && m.F_K_User == Register_id.id).ToList().Count();
                 if (statistic.SoldNotes != 0)
                 {
-                    statistic.TotalEarning = downloadedNotes.Where(m => m.F_K_User_Seller == userid && m.IsActive && m.IsApproved == true).ToList().Sum(m => m.SellPrice);
+                    statistic.TotalEarning = downloadedNotes.Where(m => m.F_K_User_Seller == Register_id.id && m.IsActive && m.IsApproved == true).ToList().Sum(m => m.SellPrice);
                 }
                 ViewBag.statistic = statistic;
                 return View();
@@ -385,16 +370,10 @@ namespace NotesMarketplace.Controllers
             }
         }
 
-        public ActionResult DownloadedNote(int? pageindex, String search, String shorthead, String downloadid, Feedback feedback, SpamReport spamReport)
+        public ActionResult DownloadedNote(int? pageindex, String search, String shorthead, String downloadid,Feedback feedback,SpamReport spamReport)
         {
-            if (userid != 0)
+            if (Register_id.id != 0)
             {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
                 if (!String.IsNullOrEmpty(downloadid))
                 {
                     var note = db.NotesDetails.FirstOrDefault(m => m.P_K_Note.ToString().Equals(downloadid));
@@ -412,11 +391,11 @@ namespace NotesMarketplace.Controllers
                 {
                     if (feedback.F_K_Note > 0)
                     {
-                        Feedback feedback2 = db.Feedbacks.FirstOrDefault(m => m.F_K_Note == feedback.F_K_Note && m.F_K_User == userid && m.IsActive);
-                        if (feedback2 != null)
+                        Feedback feedback2 = db.Feedbacks.FirstOrDefault(m => m.F_K_Note == feedback.F_K_Note && m.F_K_User == Register_id.id && m.IsActive);
+                        if(feedback2!=null)
                         {
                             feedback2.F_K_Note = feedback.F_K_Note;
-                            feedback2.F_K_User = userid;
+                            feedback2.F_K_User = Register_id.id;
                             feedback2.IsActive = true;
                             feedback2.CreatedDate = DateTime.Now;
                             feedback2.Review = feedback.Review;
@@ -427,7 +406,7 @@ namespace NotesMarketplace.Controllers
                         {
                             feedback2 = new Feedback();
                             feedback2.F_K_Note = feedback.F_K_Note;
-                            feedback2.F_K_User = userid;
+                            feedback2.F_K_User = Register_id.id;
                             feedback2.IsActive = true;
                             feedback2.CreatedDate = DateTime.Now;
                             feedback2.Review = feedback.Review;
@@ -441,19 +420,19 @@ namespace NotesMarketplace.Controllers
                 {
                     if (spamReport.F_K_Note > 0)
                     {
-                        var isexist = db.SpamReports.Any(m => m.F_K_Note == spamReport.F_K_Note && m.F_K_User == userid);
+                        var isexist = db.SpamReports.Any(m => m.F_K_Note == spamReport.F_K_Note && m.F_K_User == Register_id.id);
                         if (!isexist)
                         {
-                            spamReport.F_K_User = userid;
+                            spamReport.F_K_User = Register_id.id;
                             spamReport.CreatedDate = DateTime.Now;
 
-                            User user = db.Users.FirstOrDefault(m => m.P_K_User == userid);
+                            User user = db.Users.FirstOrDefault(m => m.P_K_User == Register_id.id);
                             if (user != null)
                             {
                                 try
                                 {
                                     var note2 = db.NotesDetails.Where(m => m.P_K_Note.ToString().Equals(spamReport.F_K_Note.ToString())).ToList();
-                                    MailMessage mail = new MailMessage(user.EmailId, "tatsav.chovatiya@gmail.com");
+                                    MailMessage mail = new MailMessage(user.EmailId, db.SystemConfigurations.FirstOrDefault().EmaillId1);
                                     mail.Subject = user.FirstName + " " + user.LastName + " Reported an issue for " + note2[0].Title;
                                     string Body = "Hello Admins,\n\n We want to inform you that, " + user.FirstName + " " + user.LastName + " Reported an issue for " + note2[0].User.FirstName + " " + note2[0].User.LastName + "’s Note with title " + note2[0].Title + ".Please look at the notes and take required actions\n\nRegards,\nNotes Marketplace";
                                     mail.Body = Body;
@@ -463,7 +442,7 @@ namespace NotesMarketplace.Controllers
                                     smtp.Port = 587;
                                     smtp.UseDefaultCredentials = false;
 
-                                    NetworkCredential nc = new NetworkCredential("tatsav.chovatiya@gmail.com", "Tadpole@786");
+                                    NetworkCredential nc = new NetworkCredential(db.SystemConfigurations.FirstOrDefault().EmaillId1, "12345678dummy");
                                     smtp.EnableSsl = true;
                                     smtp.Credentials = nc;
                                     smtp.Send(mail);
@@ -479,7 +458,7 @@ namespace NotesMarketplace.Controllers
                     }
                 }
                 List<DownloadRequests> requests = new List<DownloadRequests>();
-                List<DownloadedNote> downloadedNotes = db.DownloadedNotes.Where(m => m.IsApproved == true && m.F_K_User_Buyer == userid).ToList();
+                List<DownloadedNote> downloadedNotes = db.DownloadedNotes.Where(m => m.IsApproved == true && m.F_K_User_Buyer == Register_id.id).ToList();
                 foreach (DownloadedNote myrequest in downloadedNotes)
                 {
                     DownloadRequests dr = new DownloadRequests();
@@ -528,15 +507,8 @@ namespace NotesMarketplace.Controllers
 
         public ActionResult RejectedNotes(int? pageindex, String search, String shorthead, String downloadid)
         {
-            if (userid != 0)
+            if (Register_id.id != 0)
             {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
-
                 if (!String.IsNullOrEmpty(downloadid))
                 {
                     var note = db.NotesDetails.FirstOrDefault(m => m.P_K_Note.ToString().Equals(downloadid));
@@ -550,7 +522,7 @@ namespace NotesMarketplace.Controllers
                     }
                 }
 
-                List<NotesDetail> mynotes = db.NotesDetails.Where(m => m.F_K_User == userid && (m.F_K_NoteStatus == 5) && m.IsActive).OrderByDescending(m => m.CreatedDate).ToList();
+                List<NotesDetail> mynotes = db.NotesDetails.Where(m => m.F_K_User == Register_id.id && (m.F_K_NoteStatus == 5) && m.IsActive).OrderByDescending(m => m.CreatedDate).ToList();
 
                 if (!String.IsNullOrEmpty(search))
                 {
@@ -560,11 +532,11 @@ namespace NotesMarketplace.Controllers
                 {
                     if (shorthead.Equals("title"))
                     {
-                        mynotes = mynotes.OrderBy(m => m.Title).ToList();
+                       mynotes = mynotes.OrderBy(m => m.Title).ToList();
                     }
                     if (shorthead.Equals("category"))
                     {
-                        mynotes = mynotes.OrderBy(m => m.Category).ToList();
+                       mynotes = mynotes.OrderBy(m => m.Category).ToList();
 
                     }
                 }
@@ -576,21 +548,14 @@ namespace NotesMarketplace.Controllers
             }
         }
 
-        public ActionResult SoldNotes(int? pageindex, String search, String shorthead, String downloadid)
-        {
-            if (userid != 0)
+        public ActionResult SoldNotes(int? pageindex, String search, String shorthead ,String downloadid)
+        {            
+            if (Register_id.id != 0)
             {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
-
-                if (!String.IsNullOrEmpty(downloadid))
+                if(!String.IsNullOrEmpty(downloadid))
                 {
                     var note = db.NotesDetails.FirstOrDefault(m => m.P_K_Note.ToString().Equals(downloadid));
-                    if (note != null)
+                    if(note!=null)
                     {
                         return RedirectToAction("DownloadFile", "Home", new { filename = note.NoteAttachment });
                     }
@@ -601,7 +566,7 @@ namespace NotesMarketplace.Controllers
                 }
 
                 List<DownloadRequests> requests = new List<DownloadRequests>();
-                List<DownloadedNote> downloadedNotes = db.DownloadedNotes.Where(m => m.IsApproved == true && m.F_K_User_Seller == userid).ToList();
+                List<DownloadedNote> downloadedNotes = db.DownloadedNotes.Where(m => m.IsApproved == true && m.F_K_User_Seller == Register_id.id).ToList();
                 foreach (DownloadedNote myrequest in downloadedNotes)
                 {
                     DownloadRequests dr = new DownloadRequests();
@@ -646,28 +611,22 @@ namespace NotesMarketplace.Controllers
             }
         }
 
-        public ActionResult BuyerRequests(int? pageindex, String search, String shorthead, String reqid)
+        public ActionResult BuyerRequests(int? pageindex,String search, String shorthead,String reqid)
         {
             route = "BuyerRequests";
-            if (userid != 0)
-            {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
-
-                if (!String.IsNullOrEmpty(reqid))
+            if (Register_id.id != 0)
+            {   
+                if(!String.IsNullOrEmpty(reqid))
                 {
                     DownloadedNote downloadedNote = db.DownloadedNotes.FirstOrDefault(m => m.ID.ToString().Equals(reqid));
-                    if (downloadedNote != null)
+                    if(downloadedNote!=null)
                     {
                         downloadedNote.IsApproved = true;
                         db.SaveChanges();
-                        MailMessage mail = new MailMessage("tatsav.chovatiya@gmail.com", downloadedNote.User1.EmailId.ToString());
-                        mail.Subject = downloadedNote.User.FirstName + " " + downloadedNote.User.LastName + " Allows you to download a note";
-                        string Body = "Hello " + downloadedNote.User1.FirstName + ",\n\nwe would like to inform you that, " + downloadedNote.User.FirstName + " " + downloadedNote.User.LastName + " Allows you to download a note. \nplease login and see My Download tabs to download particular note.\n\nRegards,\nNotes Marketplace";
+
+                        MailMessage mail = new MailMessage(db.SystemConfigurations.FirstOrDefault().EmaillId1, downloadedNote.User1.EmailId.ToString());
+                        mail.Subject = downloadedNote.User.FirstName+" "+downloadedNote.User.LastName+ " Allows you to download a note";
+                        string Body = "Hello "+downloadedNote.User1.FirstName+ ",\n\nwe would like to inform you that, "+ downloadedNote.User.FirstName + " " + downloadedNote.User.LastName + " Allows you to download a note. \nplease login and see My Download tabs to download particular note.\n\nRegards,\nNotes Marketplace";
                         mail.Body = Body;
 
                         SmtpClient smtp = new SmtpClient();
@@ -675,19 +634,19 @@ namespace NotesMarketplace.Controllers
                         smtp.Port = 587;
                         smtp.UseDefaultCredentials = false;
 
-                        NetworkCredential nc = new NetworkCredential("tatsav.chovatiya@gmail.com", "Tadpole@786");
+                        NetworkCredential nc = new NetworkCredential(db.SystemConfigurations.FirstOrDefault().EmaillId1, "12345678dummy");
                         smtp.EnableSsl = true;
                         smtp.Credentials = nc;
-                        smtp.Send(mail);
+                        smtp.Send(mail);    
                     }
                 }
                 List<DownloadRequests> requests = new List<DownloadRequests>();
-                List<DownloadedNote> downloadedNotes = db.DownloadedNotes.Where(m => m.IsApproved == false && m.F_K_User_Seller == userid).ToList();
-                foreach (DownloadedNote myrequest in downloadedNotes)
+                List<DownloadedNote> downloadedNotes = db.DownloadedNotes.Where(m => m.IsApproved == false && m.F_K_User_Seller==Register_id.id).ToList();
+                foreach(DownloadedNote myrequest in downloadedNotes)
                 {
                     DownloadRequests dr = new DownloadRequests();
                     dr.downloadedNote = myrequest;
-                    dr.phonenumber = db.UserProfiles.FirstOrDefault(m => m.F_K_User == myrequest.F_K_User_Buyer).PhoneNumber;
+                    dr.phonenumber= db.UserProfiles.FirstOrDefault(m => m.F_K_User == myrequest.F_K_User_Buyer).PhoneNumber;
                     dr.emailid = db.Users.FirstOrDefault(m => m.P_K_User == myrequest.F_K_User_Buyer).EmailId;
 
                     requests.Add(dr);
@@ -695,11 +654,11 @@ namespace NotesMarketplace.Controllers
 
                 requests = requests.OrderByDescending(m => m.downloadedNote.CreatedDate).ToList();
 
-                if (!String.IsNullOrEmpty(search))
+                if(!String.IsNullOrEmpty(search))   
                 {
-                    requests = requests.Where(m => m.downloadedNote.Title.ToLower().StartsWith(search.ToLower()) || m.downloadedNote.SellPrice.ToString().Equals(search.ToString()) || m.downloadedNote.Category.ToLower().StartsWith(search) || m.emailid.Equals(search) || m.phonenumber.ToString().Equals(search.ToString())).ToList();
+                    requests = requests.Where(m =>m.downloadedNote.Title.ToLower().StartsWith(search.ToLower()) || m.downloadedNote.SellPrice.ToString().Equals(search.ToString()) || m.downloadedNote.Category.ToLower().StartsWith(search)|| m.emailid.Equals(search)||m.phonenumber.ToString().Equals(search.ToString())).ToList();
                 }
-                if (!String.IsNullOrEmpty(shorthead))
+                if(!String.IsNullOrEmpty(shorthead))
                 {
                     if (shorthead.Equals("title"))
                     {
@@ -710,22 +669,22 @@ namespace NotesMarketplace.Controllers
                         requests = requests.OrderBy(m => m.downloadedNote.Category).ToList();
 
                     }
-                    if (shorthead.Equals("phonenumber"))
+                    if(shorthead.Equals("phonenumber"))
                     {
 
                         requests = requests.OrderBy(m => m.phonenumber).ToList();
                     }
-                    if (shorthead.Equals("buyer"))
+                    if(shorthead.Equals("buyer"))
                     {
 
                         requests = requests.OrderBy(m => m.emailid).ToList();
                     }
-                    if (shorthead.Equals("price"))
+                    if(shorthead.Equals("price"))
                     {
                         requests = requests.OrderBy(m => m.downloadedNote.SellPrice).ToList();
                     }
                 }
-                return View(requests.ToPagedList(pageindex ?? 1, 10));
+                return View(requests.ToPagedList(pageindex ?? 1,10));
             }
             else
             {
@@ -756,7 +715,7 @@ namespace NotesMarketplace.Controllers
                 try
                 {
                     db.SaveChanges();
-                    MailMessage mail = new MailMessage("tatsav.chovatiya@gmail.com", user.EmailId.ToString());
+                    MailMessage mail = new MailMessage(db.SystemConfigurations.FirstOrDefault().EmaillId1, user.EmailId.ToString());
                     mail.Subject = "Note Marketplace - Email Verification";
                     string Body = "Hello " + user.FirstName + " " + user.LastName + ",\n\nThank you for signing up with us. Please click on below link to verify your email address and to do login. \nhttps://localhost:44381/Home/EmailVerification/?id=" + user.EmailId + "\n\nRegards,\nNotes Marketplace";
                     mail.Body = Body;
@@ -766,7 +725,7 @@ namespace NotesMarketplace.Controllers
                     smtp.Port = 587;
                     smtp.UseDefaultCredentials = false;
 
-                    NetworkCredential nc = new NetworkCredential("tatsav.chovatiya@gmail.com", "Tadpole@786");
+                    NetworkCredential nc = new NetworkCredential(db.SystemConfigurations.FirstOrDefault().EmaillId1, "12345678dummy");
                     smtp.EnableSsl = true;
                     smtp.Credentials = nc;
                     smtp.Send(mail);
@@ -828,10 +787,19 @@ namespace NotesMarketplace.Controllers
                     {
                         if (auth.IsEmailVerified == true)
                         {
-                            userid = auth.P_K_User;
+                            Register_id.id = auth.P_K_User;
+                            var temp = auth.UserProfiles.FirstOrDefault();
+                            if(temp!=null)
+                            {
+                                Register_id.profilepicture = temp.ProfilePicture;
+                            }
+                            else
+                            {
+                                //Register_id.profilepicture = db.SystemConfigurations.FirstOrDefault().DefaultProfilePicture;
+                            }
                             if (auth.IsDetailsSubmitted == true)
                             {
-                                if (!String.IsNullOrEmpty(route))
+                                if(!String.IsNullOrEmpty(route))
                                 {
                                     return RedirectToAction(route, "Home");
                                 }
@@ -848,9 +816,12 @@ namespace NotesMarketplace.Controllers
                             return View(user);
                         }
                     }
-                    else
+                    if(auth.F_K_UserRoles == 2 || auth.F_K_UserRoles == 3)
                     {
-                        ViewBag.isauth = "You are not Member...";
+                        var temp = auth.AdminProfiles.FirstOrDefault();
+                        //Register_id.profilepicture = temp.ProfilePicture;
+                        Register_id.id = auth.P_K_User;
+                        return RedirectToAction("Dashboard", "Admin");
                     }
                 }
                 ViewBag.isauth = "You are Blocked...";
@@ -862,27 +833,41 @@ namespace NotesMarketplace.Controllers
             return View(user);
         }
 
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(String id)
         {
+            if (!String.IsNullOrEmpty(id))
+            {
+                ViewBag.id = id;
+            }
             return View();
         }
 
         [HttpPost]
-        public ActionResult ChangePassword(ChangePassword changePassword)
+        public ActionResult ChangePassword(ChangePassword changePassword,String id)
         {
-            if (userid != 0)
+            int tempid = 0;
+            if (Register_id.id==0)
             {
-                bool exist = db.Users.Any(m => m.P_K_User == userid && changePassword.OldPassword.Equals(m.Password) && m.IsActive);
-                if (exist)
+                tempid = Convert.ToInt32(id);
+            }
+            else
+            {
+                tempid = Register_id.id;
+            }
+
+            if(tempid!=0)
+            {
+                bool exist = db.Users.Any(m=>m.P_K_User== tempid && changePassword.OldPassword.Equals(m.Password)&&m.IsActive);
+                if(exist)
                 {
-                    User user = db.Users.FirstOrDefault(m => m.P_K_User == userid);
-                    if (user != null)
+                    User user = db.Users.FirstOrDefault(m => m.P_K_User == tempid);
+                    if(user!=null)
                     {
                         user.Password = changePassword.Password;
                         user.Password2 = user.Password;
                         db.SaveChanges();
 
-                        return RedirectToAction("Login", "Home");
+                        return RedirectToAction("Login","Home");
                     }
                 }
                 else
@@ -898,15 +883,6 @@ namespace NotesMarketplace.Controllers
         public ActionResult FAQ()
         {
             route = "FAQ";
-            if (userid != 0)
-            {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
-            }
             List<FAQ> myfaqs = db.FAQs.ToList();
             return View(myfaqs);
         }
@@ -920,23 +896,13 @@ namespace NotesMarketplace.Controllers
 
         public ActionResult NoteDetails(String noteid, String SellPrice)
         {
-            if (userid != 0)
-            {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
-            }
-
             if (!String.IsNullOrEmpty(noteid))
             {
                 NotesDetail noteDetails = db.NotesDetails.FirstOrDefault(m => m.P_K_Note.ToString().Equals(noteid));
                 if (noteDetails != null)
                 {
-                    bool isexist = db.DownloadedNotes.Any(m => m.F_K_Note == noteDetails.P_K_Note && m.F_K_User_Buyer == userid && m.F_K_User_Seller == noteDetails.F_K_User);
-                    bool isapproved = db.DownloadedNotes.Any(m => m.F_K_Note == noteDetails.P_K_Note && m.F_K_User_Buyer == userid && m.F_K_User_Seller == noteDetails.F_K_User && m.IsApproved == true);
+                    bool isexist = db.DownloadedNotes.Any(m => m.F_K_Note == noteDetails.P_K_Note && m.F_K_User_Buyer == Register_id.id && m.F_K_User_Seller == noteDetails.F_K_User);
+                    bool isapproved = db.DownloadedNotes.Any(m => m.F_K_Note == noteDetails.P_K_Note && m.F_K_User_Buyer == Register_id.id && m.F_K_User_Seller == noteDetails.F_K_User && m.IsApproved == true);
                     ViewBag.btntext = "Download/$" + noteDetails.SellPrice;
                     if (noteDetails.SellPrice == 0)
                     {
@@ -946,11 +912,11 @@ namespace NotesMarketplace.Controllers
                     {
                         ViewBag.btntext = "Download/$" + noteDetails.SellPrice;
                     }
-                    if (noteDetails.User.P_K_User == userid)
+                    if (noteDetails.User.P_K_User == Register_id.id)
                     {
                         ViewBag.btntext = "Download";
                     }
-                    if (isexist)
+                    if(isexist)
                     {
                         if (isapproved)
                         {
@@ -963,24 +929,24 @@ namespace NotesMarketplace.Controllers
                     }
                     if (SellPrice != null)
                     {
-                        if (userid == 0)
+                        if (Register_id.id == 0)
                         {
                             return RedirectToAction("Login", "Home");
                         }
-                        if (userid == noteDetails.F_K_User)
+                        if (Register_id.id == noteDetails.F_K_User)
                         {
                             return RedirectToAction("DownloadFile", "Home", new { filename = noteDetails.NoteAttachment });
                         }
                         DownloadedNote downloadedNote = new DownloadedNote();
                         downloadedNote.F_K_Note = noteDetails.P_K_Note;
-                        downloadedNote.F_K_User_Buyer = userid;
+                        downloadedNote.F_K_User_Buyer = Register_id.id;
                         downloadedNote.F_K_User_Seller = noteDetails.F_K_User;
                         downloadedNote.IsActive = true;
                         downloadedNote.Title = noteDetails.Title;
                         downloadedNote.Attachment = noteDetails.NoteAttachment;
                         downloadedNote.Category = noteDetails.Category;
 
-
+                        
                         if (SellPrice.Equals("0"))
                         {
                             if (!isexist)
@@ -997,7 +963,7 @@ namespace NotesMarketplace.Controllers
                         {
                             User user = db.Users.FirstOrDefault(m => m.P_K_User == noteDetails.F_K_User);
                             ViewBag.sellername = user.FirstName + " " + user.LastName;
-                            User user2 = db.Users.FirstOrDefault(m => m.P_K_User == userid);
+                            User user2 = db.Users.FirstOrDefault(m => m.P_K_User == Register_id.id);
                             ViewBag.name = user2.FirstName;
 
                             if (isexist)
@@ -1022,20 +988,27 @@ namespace NotesMarketplace.Controllers
                                 db.DownloadedNotes.Add(downloadedNote);
                                 db.SaveChanges();
 
-                                MailMessage mail = new MailMessage("tatsav.chovatiya@gmail.com", noteDetails.User.EmailId);
-                                mail.Subject = user2.FirstName + " " + user2.LastName + "  wants to purchase your notes";
-                                string Body = "Hello, " + user.FirstName + " " + user.LastName + "\nWe would like to inform you that, " + user2.FirstName + "" + user2.LastName + " wants to purchase your notes. Please see Buyer Requests tab and allow download access to Buyer if you have received the payment from him.\nRegards,\nNotes Marketplace";
-                                mail.Body = Body;
+                                try
+                                {
+                                    MailMessage mail = new MailMessage(db.SystemConfigurations.FirstOrDefault().EmaillId1, noteDetails.User.EmailId);
+                                    mail.Subject = user2.FirstName + " " + user2.LastName + "  wants to purchase your notes";
+                                    string Body = "Hello, " + user.FirstName + " " + user.LastName + "\nWe would like to inform you that, " + user2.FirstName + "" + user2.LastName + " wants to purchase your notes. Please see Buyer Requests tab and allow download access to Buyer if you have received the payment from him.\nRegards,\nNotes Marketplace";
+                                    mail.Body = Body;
 
-                                SmtpClient smtp = new SmtpClient();
-                                smtp.Host = "smtp.gmail.com";
-                                smtp.Port = 587;
-                                smtp.UseDefaultCredentials = false;
+                                    SmtpClient smtp = new SmtpClient();
+                                    smtp.Host = "smtp.gmail.com";
+                                    smtp.Port = 587;
+                                    smtp.UseDefaultCredentials = false;
 
-                                NetworkCredential nc = new NetworkCredential("tatsav.chovatiya@gmail.com", "Tadpole@786");
-                                smtp.EnableSsl = true;
-                                smtp.Credentials = nc;
-                                smtp.Send(mail);
+                                    NetworkCredential nc = new NetworkCredential(db.SystemConfigurations.FirstOrDefault().EmaillId1, "12345678dummy");
+                                    smtp.EnableSsl = true;
+                                    smtp.Credentials = nc;
+                                    smtp.Send(mail);
+                                }
+                                catch
+                                {
+
+                                }
                             }
                         }
                     }
@@ -1054,9 +1027,9 @@ namespace NotesMarketplace.Controllers
                                 sum = sum + listofreviews[i].Review;
                             }
                             ViewBag.rates = sum / count;
-                            List<Feedback> temp2 = listofreviews.OrderByDescending(m => m.CreatedDate).OrderByDescending(m => m.Review).ToList();
+                            List<Feedback> temp2 = listofreviews.OrderByDescending(m=>m.CreatedDate).OrderByDescending(m=>m.Review).ToList();
                             List<Feedbacks> feedbacks = new List<Feedbacks>();
-                            foreach (Feedback feedback in temp2)
+                            foreach(Feedback feedback in temp2)
                             {
                                 Feedbacks tempfeedback = new Feedbacks();
                                 tempfeedback.feedbacks = feedback;
@@ -1066,7 +1039,7 @@ namespace NotesMarketplace.Controllers
                             ViewBag.feedbacks = feedbacks;
                         }
                     }
-                    ViewBag.numofreview = db.Feedbacks.Where(m => m.F_K_Note.ToString().Equals(noteid) && m.IsActive).Count();
+                    ViewBag.numofreview = temp.Count();
                     ViewBag.inappropriate = db.SpamReports.Where(m => m.F_K_Note.ToString().Equals(noteid)).Count();
                     return View(noteDetails);
                 }
@@ -1077,15 +1050,6 @@ namespace NotesMarketplace.Controllers
         public ActionResult Search(int? pageindex, String search, String university, String type, String country, String course, String rating, String category)
         {
             route = "Search";
-            if (userid != 0)
-            {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
-            }
             List<My_Search> noteslist = new List<My_Search>();
             try
             {
@@ -1095,14 +1059,14 @@ namespace NotesMarketplace.Controllers
                     My_Search mynote = new My_Search();
                     mynote.mynote = note;
                     mynote.spam = db.SpamReports.Where(m => m.F_K_Note == note.P_K_Note).Count();
-                    mynote.reviews = db.Feedbacks.Where(m => m.F_K_Note == note.P_K_Note).Count();
+                    mynote.reviews = db.Feedbacks.Where(m => m.F_K_Note == note.P_K_Note&&m.IsActive).Count();
                     mynote.avg = 0;
-                    var temp = db.Feedbacks.Where(m => m.F_K_Note == note.P_K_Note);
+                    var temp = db.Feedbacks.Where(m => m.F_K_Note == note.P_K_Note&&m.IsActive);
                     if (temp != null)
                     {
                         var listofreviews = temp.ToList();
                         var count = listofreviews.Count();
-                        if (count != 0)
+                        if(count!=0)
                         {
                             int sum = 0;
                             for (int i = 0; i < count; i++)
@@ -1110,7 +1074,7 @@ namespace NotesMarketplace.Controllers
                                 sum = sum + listofreviews[i].Review;
                             }
                             mynote.avg = sum / count;
-                        }
+                        } 
                     }
                     noteslist.Add(mynote);
                 }
@@ -1135,17 +1099,17 @@ namespace NotesMarketplace.Controllers
                 }
                 if (!String.IsNullOrEmpty(course))
                 {
-                    noteslist = noteslist.Where(m => m.mynote.Course != null).ToList();
-                    noteslist = noteslist.Where(m => m.mynote.Course.ToLower().Equals(course.ToLower())).ToList();
+                    noteslist = noteslist.Where(m => m.mynote.Course!=null).ToList();
+                    noteslist = noteslist.Where(m => m.mynote.Course.ToLower().Equals(course.ToLower())).ToList();  
                 }
                 if (!String.IsNullOrEmpty(category))
                 {
-                    noteslist = noteslist.Where(m => m.mynote.Category != null).ToList();
+                    noteslist = noteslist.Where(m => m.mynote.Category!=null).ToList();
                     noteslist = noteslist.Where(m => m.mynote.Category.ToLower().Equals(category.ToLower())).ToList();
                 }
                 if (!String.IsNullOrEmpty(rating))
                 {
-                    noteslist = noteslist.Where(m => m.avg.ToString().Equals(rating)).ToList();
+                    noteslist = noteslist.Where(m=>m.avg.ToString().Equals(rating)).ToList();
                 }
             }
             catch (Exception)
@@ -1163,31 +1127,28 @@ namespace NotesMarketplace.Controllers
         public ActionResult UserProfile()
         {
             UserProfile userprofile = new UserProfile();
-            if (userid != 0)
+            if (Register_id.id != 0)
             {
-                ViewBag.IsValid = "true";
-                var userprofiletemp = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofiletemp != null)
-                {
-                    ViewBag.ProfilePicture = userprofiletemp.ProfilePicture;
-                }
-
-                User user = db.Users.FirstOrDefault(m => m.P_K_User == userid);
+                User user = db.Users.FirstOrDefault(m => m.P_K_User == Register_id.id);
                 if (user != null)
                 {
-                    List<ManageCTC> manageCTCs = db.ManageCTCs.Where(m => m.IsActive == true).ToList();
+                    List<ManageCTC> manageCTCs = db.ManageCTCs.Where(m=>m.IsActive==true).ToList();
                     ViewBag.MyCTC = manageCTCs;
 
                     userprofile = db.UserProfiles.FirstOrDefault(m => m.ID == user.P_K_User);
-                    if (userprofile != null)
+                    if(userprofile!=null)
                     {
                         userprofile.CountryCode = userprofile.PhoneNumber.Substring(0, 3);
                         userprofile.Number = userprofile.PhoneNumber.Substring(3);
                         if (userprofile.DOB != null)
                         {
-                            // userprofile.DOB = userprofile.DOB.ToString("YYYY-MM-DD");
+                           // userprofile.DOB = userprofile.DOB.ToString("YYYY-MM-DD");
                         }
                         ViewBag.update = "true";
+                    }
+                    else
+                    {
+                        userprofile = new UserProfile();
                     }
                     userprofile.User = user;
                     return View(userprofile);
@@ -1197,19 +1158,19 @@ namespace NotesMarketplace.Controllers
         }
 
         [HttpPost]
-        public ActionResult UserProfile(UserProfile userprofile, String flag_update)
+        public ActionResult UserProfile(UserProfile userprofile,String flag_update)
         {
-            try
+           try
             {
-                List<ManageCTC> manageCTCs = db.ManageCTCs.Where(m => m.IsActive == true).ToList();
+                List<ManageCTC> manageCTCs = db.ManageCTCs.Where(m=>m.IsActive==true).ToList();
                 ViewBag.MyCTC = manageCTCs;
                 userprofile.PhoneNumber = userprofile.CountryCode.ToString() + userprofile.Number.ToString();
-                userprofile.F_K_User = userid;
+                userprofile.F_K_User = Register_id.id;
                 if (userprofile.Gender.Equals("Select your gender"))
                 {
                     userprofile.Gender = null;
                 }
-                User user = db.Users.FirstOrDefault(m => m.P_K_User == userid);
+                User user = db.Users.FirstOrDefault(m => m.P_K_User == Register_id.id);
                 user.IsDetailsSubmitted = true;
                 user.Password2 = user.Password;
                 user.FirstName = userprofile.User.FirstName;
@@ -1217,6 +1178,7 @@ namespace NotesMarketplace.Controllers
                 user.IsActive = true;
                 userprofile.ModifiedDate = DateTime.Now;
                 userprofile.IsActive = true;
+                //userprofile.ProfilePicture = db.SystemConfigurations.FirstOrDefault().DefaultProfilePicture;
                 userprofile.ID = user.P_K_User;
                 userprofile.User = user;
 
@@ -1232,7 +1194,7 @@ namespace NotesMarketplace.Controllers
                             ViewBag.ProfilePicture = "File size should be less then 10 MB";
                             return View(userprofile);
                         }
-                        string fileName = userid.ToString() + "hfhbshvbadyig" + extension;
+                        string fileName = Register_id.id.ToString() + "hfhbshvbadyig" + extension;
                         userprofile.File.SaveAs(Path.Combine(path, fileName));
                         userprofile.ProfilePicture = fileName;
                     }
@@ -1243,28 +1205,29 @@ namespace NotesMarketplace.Controllers
                     }
                 }
 
-                if (flag_update == null)
+                if(flag_update==null)
                 {
                     db.UserProfiles.Add(userprofile);
                 }
                 else
                 {
-                    UserProfile userProfile2 = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                    if (userProfile2 != null)
+                    UserProfile userProfile2 = db.UserProfiles.FirstOrDefault(m => m.F_K_User == Register_id.id);
+                    if(userProfile2!=null)
                     {
                         userProfile2.DOB = userprofile.DOB;
                         userProfile2.Address1 = userprofile.Address1;
                         userProfile2.Address2 = userprofile.Address2;
                         userProfile2.City = userprofile.City;
                         userProfile2.College = userprofile.College;
-                        userProfile2.Country = userprofile.Country;
+                        userProfile2.Country= userprofile.Country;
                         userProfile2.CountryCode = userprofile.CountryCode;
                         userProfile2.F_K_User = userprofile.F_K_User;
                         userProfile2.PhoneNumber = userprofile.PhoneNumber;
                         userProfile2.Number = userprofile.Number;
-                        if (userprofile.File != null)
+                        if(userprofile.File!=null)
                         {
                             userProfile2.ProfilePicture = userprofile.ProfilePicture;
+                            Register_id.profilepicture = userprofile.ProfilePicture;
                         }
                         userProfile2.University = userprofile.University;
                         userProfile2.User = userprofile.User;
@@ -1286,17 +1249,12 @@ namespace NotesMarketplace.Controllers
         public ActionResult ContactUs()
         {
             route = "ContactUs";
-            if (userid != 0)
+            if (Register_id.id != 0)
             {
-                ViewBag.IsValid = "true";
-                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
-                if (userprofile != null)
-                {
-                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
-                }
+                UserProfile userProfile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == Register_id.id);
                 ContactUs contactus = new ContactUs();
-                contactus.FullName = userprofile.User.FirstName + " " + userprofile.User.LastName;
-                contactus.EmailId = userprofile.User.EmailId;
+                contactus.FullName = userProfile.User.FirstName + " " + userProfile.User.LastName;
+                contactus.EmailId = userProfile.User.EmailId;
                 if (contactus.EmailId != null)
                 {
                     ViewBag.Email_Disable = "true";
@@ -1311,7 +1269,7 @@ namespace NotesMarketplace.Controllers
         {
             try
             {
-                MailMessage mail = new MailMessage("tatsav.chovatiya@gmail.com", "tatsav.chovatiya@gmail.com");
+                MailMessage mail = new MailMessage(db.SystemConfigurations.FirstOrDefault().EmaillId1, db.SystemConfigurations.FirstOrDefault().EmaillId1);
                 mail.Subject = contactUs.Subject.ToString();
                 string Body = "Hello,\n" + contactUs.Comments.ToString() + "Regards,\n" + contactUs.FullName;
                 mail.Body = Body;
@@ -1321,12 +1279,12 @@ namespace NotesMarketplace.Controllers
                 smtp.Port = 587;
                 smtp.UseDefaultCredentials = false;
 
-                NetworkCredential nc = new NetworkCredential("tatsav.chovatiya@gmail.com", "Tadpole@786");
+                NetworkCredential nc = new NetworkCredential(db.SystemConfigurations.FirstOrDefault().EmaillId1, "12345678dummy");
                 smtp.EnableSsl = true;
                 smtp.Credentials = nc;
                 smtp.Send(mail);
             }
-            catch
+            catch 
             {
 
             }
@@ -1348,21 +1306,27 @@ namespace NotesMarketplace.Controllers
                 if (auth != null)
                 {
                     String getranpass = RandomPassword.Generate(8, 10);
-                    MailMessage mail = new MailMessage("tatsav.chovatiya@gmail.com", EmailId.ToString());
-                    mail.Subject = "New Temporary Password has been created for you";
-                    string Body = "Hello,\n\nWe have generated a new password for you \nPassword:" + getranpass + "\n\nRegards,\nNotes Marketplace";
-                    mail.Body = Body;
-                    // mail.IsBodyHtml = true;
+                    try
+                    {
+                        MailMessage mail = new MailMessage(db.SystemConfigurations.FirstOrDefault().EmaillId1, EmailId.ToString());
+                        mail.Subject = "New Temporary Password has been created for you";
+                        string Body = "Hello,\n\nWe have generated a new password for you \nPassword:" + getranpass + "\n\nRegards,\nNotes Marketplace";
+                        mail.Body = Body;
 
-                    SmtpClient smtp = new SmtpClient();
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.Port = 587;
-                    smtp.UseDefaultCredentials = false;
+                        SmtpClient smtp = new SmtpClient();
+                        smtp.Host = "smtp.gmail.com";
+                        smtp.Port = 587;
+                        smtp.UseDefaultCredentials = false;
 
-                    NetworkCredential nc = new NetworkCredential("tatsav.chovatiya@gmail.com", "Tadpole@786");
-                    smtp.EnableSsl = true;
-                    smtp.Credentials = nc;
-                    smtp.Send(mail);
+                        NetworkCredential nc = new NetworkCredential(db.SystemConfigurations.FirstOrDefault().EmaillId1, "12345678dummy");
+                        smtp.EnableSsl = true;
+                        smtp.Credentials = nc;
+                        smtp.Send(mail);
+                    }
+                    catch
+                    {
+
+                    }
 
                     User user = db.Users.FirstOrDefault(x => x.EmailId.Equals(EmailId.ToString()));
                     user.Password = getranpass;
@@ -1422,7 +1386,8 @@ namespace NotesMarketplace.Controllers
         public ActionResult LogOut()
         {
             route = null;
-            userid = 0;
+            Register_id.id = 0;
+            Register_id.profilepicture = null;
             return RedirectToAction("Home", "Home");
         }
     }

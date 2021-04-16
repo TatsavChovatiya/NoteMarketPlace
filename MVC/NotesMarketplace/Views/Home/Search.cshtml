@@ -4,8 +4,7 @@
 @{
     ViewBag.activelink_search = "active-link";
     ViewBag.Title = "Search";
-    ViewBag.activelink = "active-link";
-    if (ViewBag.IsValid == "true")
+    if (NotesMarketplace.MyClass.Register_id.id!=0)
     {
         Layout = "~/Views/Shared/Register.cshtml";
         ViewBag.IsValid = null;
@@ -14,7 +13,6 @@
     {
         Layout = "~/Views/Shared/Non_Register.cshtml";
     }
-
 }
 <section class="setfooter">
     <!-- First Section -->

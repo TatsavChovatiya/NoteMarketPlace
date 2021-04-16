@@ -1,0 +1,139 @@
+﻿@model IPagedList<NotesMarketplace.Models.ManageCTC_Admin>
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.title = "Manage Country";
+    ViewBag.managepage = "active-link";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+}
+
+<section id="dashboard-top" class="admin-top">
+
+    <div class="container">
+
+        <!-- dashboard heading & add note button -->
+        <div class="row dashboard-top-title">
+
+            <!-- Title -->
+            <div class="col-md-6 col-sm-12 col-12">
+                <div class="dashboar-heading">
+                    <h2>Manage Category</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section id="dashboard-second-section" class="admin-dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                <form action="AddCountry">
+                    <button type="submit" class="btn text-uppercase text-center admin-btn" id="mybtn"><b>Add Category</b></button>
+                </form>
+            </div>
+            <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+                <form>
+                    <div class="row justify-content-end">
+                        <input hidden name="sort" value="@Request.QueryString["sort"]" />
+                        <div class="wrapper">
+                            <img src="~/Admin_Content/images/Dashboard/search.jpg" class="searchimage doup">
+                            <input name="search" value="@Request.QueryString["search"]" class="form-control search-bar InputEmail1" placeholder="Search">
+                        </div>
+                        <div class="marge-left">
+                            <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>Search</b></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="grid-table table-responsive-xl">
+                    <table class="table">
+                        <thead>
+                            <tr style="cursor:default">
+                                <th scope="col" class="align-middle text-center">SR NO.</th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("ManageCountry", "Admin", new { sort = "category", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">CATEGORY</a></th>
+                                <th scope="col" class="align-middle text-center">COUNTRY CODE</th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("ManageCountry", "Admin", new { sort = "", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">DATE ADDED</a></th>
+                                <th scope="col" class="align-middle">ADDED BY</th>
+                                <th scope="col" class="align-middle text-center">ACTIVE</th>
+                                <th scope="col" class="align-middle">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count() == 0)
+                            {
+                                <tr> <td colspan="7" class="align-middle"> Records not found </td></tr>
+                            }
+                            @{
+                                int index = 0;
+                                if (Request.QueryString["pageindex"] == null || Request.QueryString["pageindex"].Equals("1"))
+                                {
+                                    index = 0;
+                                }
+                                else
+                                {
+                                    index = (Convert.ToInt32(Request.QueryString["pageindex"]) - 1) * 5;
+                                }
+                            }
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                NotesMarketplace.Models.ManageCTC_Admin category = Model[i];
+
+                                <tr style="cursor:default">
+                                    <td class="align-middle text-center">@(index + i+1)</td>
+                                    <td class="align-middle">@category.manageCTC.Value</td>
+                                    <td class="align-middle text-center">@category.manageCTC.CountryCode</td>
+                                    <td class="align-middle">@category.manageCTC.CreatedDate.Value.ToString("g").Replace(" ", ", ")</td>
+                                    <td class="align-middle">@category.name</td>
+                                    @if (category.manageCTC.IsActive)
+                                    {
+                                        <td class="align-middle text-center">Yes</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="align-middle text-center">No</td>
+                                    }
+                                    <td class="align-middle dopointer">
+                                        <div class="row">
+                                            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                                                <a href="@Url.Action("EditCountry","Admin",new { id=category.manageCTC.ID})">
+                                                    <img src="~/Admin_Content/images/Dashboard/edit.png" alt="Edit">
+                                                </a>
+                                            </div>
+                                            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                                                <a href="@Url.Action("DeleteCountry","Admin",new { id=category.manageCTC.ID })">
+                                                    <i class="fa fa-trash-alt dowhite dobig"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="pagination">
+    @Html.PagedListPager(Model, pageindex => Url.Action("ManageCountry", "Admin", new { pageindex, search = Request.QueryString["search"], sort = Request.QueryString["sort"] }), new PagedList.Mvc.PagedListRenderOptions
+{
+    ContainerDivClasses = null,
+    LiElementClasses = new string[] { "page-item1" },
+    UlElementClasses = new string[] { "pagination justify-content-center" },
+    LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
+    LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>",
+    MaximumPageNumbersToDisplay = 5,
+    DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+    DisplayLinkToLastPage = PagedListDisplayMode.Never
+
+})
+</section>

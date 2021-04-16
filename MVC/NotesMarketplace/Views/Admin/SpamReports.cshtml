@@ -1,0 +1,130 @@
+﻿@model IPagedList<NotesMarketplace.SpamReport>
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.title = "Spam Reports";
+    ViewBag.report = "active-link";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+}
+<section id="dashboard-top" class="admin-top">
+
+    <div class="container">
+        <div class="row dashboard-top-title">
+            <div class="col-md-6 col-sm-12 col-12">
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section id="dashboard-second-section" class="admin-dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                <div class="dashboar-heading centerheading">
+                    <h2>Spam Reports</h2>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+                <form>
+                    <div class="row justify-content-end">
+                        <input hidden name="sort" value="@Request.QueryString["sort"]" />
+                        <div class="wrapper">
+                            <img src="~/Admin_Content/images/Dashboard/search.jpg" class="searchimage doup">
+                            <input name="search" value="@Request.QueryString["search"]" class="form-control search-bar InputEmail1" placeholder="Search">
+                        </div>
+                        <div class="marge-left">
+                            <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>Search</b></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="grid-table table-responsive-xl">
+                    <table class="table">
+                        <thead>
+                            <tr style="cursor:default">
+                                <th scope="col" class="align-middle text-center">SR NO.</th>
+                                <th scope="col" class="align-middle">REPORTED BY</th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("SpamReports", "Admin", new { sort = "title", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">NOTE TITLE</a></th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("SpamReports", "Admin", new { sort = "category", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">CATEGORY</a></th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("SpamReports", "Admin", new { sort = "", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">DATE EDITED</a></th>
+                                <th scope="col" class="align-middle">REMARK</th>
+                                <th scope="col" class="align-middle">ACTION</th>
+                                <th scope="col" class="align-middle"></th>
+                                <th scope="col" class="align-middle"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count() == 0)
+                            {
+                                <tr> <td colspan="9" class="align-middle"> Records not found </td></tr>
+                            }
+                            @{
+                                int index = 0;
+                                if (Request.QueryString["pageindex"] == null || Request.QueryString["pageindex"].Equals("1"))
+                                {
+                                    index = 0;
+                                }
+                                else
+                                {
+                                    index = (Convert.ToInt32(Request.QueryString["pageindex"]) - 1) * 5;
+                                }
+                            }
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                NotesMarketplace.SpamReport report = Model[i];
+                                <tr style="cursor:default">
+                                    <td class="align-middle text-center">@(index + i+1)</td>
+                                    <td class="align-middle">@report.User.FirstName @report.User.LastName</td>
+                                    <td class="align-middle getpurple"><a href="@Url.Action("NoteDetails","Admin",new {noteid=report.NotesDetail.P_K_Note})">@report.NotesDetail.Title</a></td>
+                                    <td class="align-middle">@report.NotesDetail.Category</td>
+                                    <td class="align-middle">@report.CreatedDate.Value.ToString("g").Replace(" ", ", ")</td>
+                                    <td class="align-middle text-center">@report.Remark</td>
+                                    <td class="align-middle text-center">
+                                        <a href="@Url.Action("DeletepamReport","Admin",new {id=report.ID})">
+                                            <i class="fa fa-trash-alt dowhite dobig dopointer"></i>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle dopointer">
+                                        <div class="dropdown">
+                                            <a id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v  dowhite"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="@Url.Action("DownloadFile","Home",new {fileName=new NotesMarketplaceEntities().NotesDetails.Where(m=>m.P_K_Note==report.NotesDetail.P_K_Note).FirstOrDefault().NoteAttachment})">Download Notes</a>
+                                                <a class="dropdown-item" href="@Url.Action("NoteDetails","Admin",new {noteid=report.NotesDetail.P_K_Note})">View More Details</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            }
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="pagination">
+    @Html.PagedListPager(Model, pageindex => Url.Action("SpamReports", "Admin", new { pageindex, search = Request.QueryString["search"], sort = Request.QueryString["sort"] }), new PagedList.Mvc.PagedListRenderOptions
+{
+    ContainerDivClasses = null,
+    LiElementClasses = new string[] { "page-item1" },
+    UlElementClasses = new string[] { "pagination justify-content-center" },
+    LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
+    LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>",
+    MaximumPageNumbersToDisplay = 5,
+    DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+    DisplayLinkToLastPage = PagedListDisplayMode.Never
+
+})
+</section>
+

@@ -49,13 +49,7 @@
                                         <td class="align-middle">@mynotes.CreatedDate.Value.ToShortDateString()</td>
                                         <td class="align-middle">@mynotes.Title</td>
                                         <td class="align-middle">@mynotes.Category</td>
-                                        @foreach (var item in getlist_code)
-                                        {
-                                            if (item.P_K_NotesStatus == mynotes.F_K_NoteStatus)
-                                            {
-                                                <td class="align-middle">@item.Name</td>
-                                            }
-                                        }
+                                        <td class="align-middle">@mynotes.NotesStatu.Name</td>  
 
                                         @if (@mynotes.F_K_NoteStatus == 1)
                                         {

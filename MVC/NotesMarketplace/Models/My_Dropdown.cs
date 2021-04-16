@@ -14,7 +14,7 @@ namespace NotesMarketplace.Models
         {
             db = new NotesMarketplaceEntities();
             myctc = db.ManageCTCs.ToList();
-
+           
             types = myctc.Where(m => m.CTC.P_K_CTC == 2).Select(m => m.Value.ToLower()).Distinct().ToList();
             categories = myctc.Where(m => m.CTC.P_K_CTC == 1).Select(m => m.Value.ToLower()).Distinct().ToList();
             universities = db.NotesDetails.Where(m => m.InstitutionName != null).Select(m => m.InstitutionName.ToLower()).Distinct().ToList();

@@ -1,0 +1,251 @@
+﻿@model IPagedList<NotesMarketplace.Models.Dashboard_Admin>
+@using PagedList
+@using PagedList.Mvc 
+@{
+    ViewBag.title = "Dashboard";
+    ViewBag.dashboard = "active-link";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+}
+<section id="dashboard-top">
+
+    <div class="container">
+
+        <!-- dashboard heading & add note button -->
+        <div class="row dashboard-top-title">
+
+            <!-- Title -->
+            <div class="col-md-6 col-sm-12 col-12">
+                <div class="dashboar-heading">
+                    <h2>Dashboard</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard content -->
+        <div class="dashboar-content">
+            <div class="row">
+
+                <!-- Right -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row mynote-info">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+
+                            <!-- Number of notes sell -->
+                            <div class="dash-right text-center">
+                                <h4><b><a href="@Url.Action("NoteUnderReview","Admin")">@ViewBag.InReview_Notes</a></b></h4>
+                                <p>Numbers of Notes Review for Publish</p>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+
+                            <!-- Number of notes sell -->
+                            <div class="dash-right text-center">
+                                <h4><b><a href="@Url.Action("DownloadedNotes","Admin")">@ViewBag.DownloadedNotes</a></b></h4>
+                                <p>Number of New Notes Downloaded(Last 7 days)</p>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-12">
+
+                            <!-- Number of notes sell -->
+                            <div class="dash-right text-center">
+                                <h4><b><a href="@Url.Action("Members","Admin")">@ViewBag.RegisterUSer</a></b></h4>
+                                <p>Numbers of New Registations(Last 7 days)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="dashboard-second-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-3 col-lg-4">
+                <h3>Published Notes</h3>
+            </div>
+            <div class="col-12 col-sm-12 col-md-9 col-lg-8">
+                <form>
+                    <div class="row justify-content-end">
+
+                        <div class="wrapper">
+                            <img src="~/Admin_Content/images/Dashboard/search.jpg" class="searchimage doup">
+                            <input hidden name="sort" value="@Request.QueryString["sort"]" />
+                            <input name="search" value="@Request.QueryString["search"]" class="form-control search-bar InputEmail1" placeholder="Search">
+                        </div>
+                        <div class="marge-left">
+                            <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>Search</b></button>
+                        </div>
+                        <div class="form-group getmargr">
+                            <select name="month" class="form-control inputselect" onchange="location.href=this.value">
+                                <option value="@Url.Action("Dashboard", "Admin", new { month = "", sort=Request.QueryString["sort"] })">Select month</option>
+                                @for (int i = 0; i < 6; i++)
+                                {
+                                    var mmyyyy = DateTime.Now.AddMonths(-i).ToString("Y");
+                                    if (Request.QueryString["month"] != null)
+                                    {
+                                        if (Request.QueryString["month"].ToString().Equals(mmyyyy))
+                                        {
+                                            <option selected value="@Url.Action("Dashboard", "Admin", new { month = mmyyyy, sort=Request.QueryString["sort"] })">@mmyyyy</option>
+                                            continue;
+                                        }
+                                    }
+                                    <option value="@Url.Action("Dashboard", "Admin", new { month = mmyyyy, sort=Request.QueryString["sort"] })">@mmyyyy</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="grid-table table-responsive-xl">
+                    <table class="table">
+                        <thead class="headr-wrap">
+                            <tr style="cursor:default">
+                                <th scope="col" class="align-middle text-center">SR NO.</th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("Dashboard","Admin",new {sort="title",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })">NOTE TITLE</a></th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("Dashboard","Admin",new {sort="category",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })">CATEGORY</a></th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("Dashboard","Admin",new {sort="notesize",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })">ATTACHMENT SIZE</a></th>
+                                <th scope="col" class="align-middle text-center dopointer">SELL TYPE</th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("Dashboard","Admin",new {sort="price",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })">PRICE</a></th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("Dashboard","Admin",new {sort="seller",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })">PUBLISHER</a></th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("Dashboard","Admin",new {sort="",pageindex=Request.QueryString["pageindex"],search=Request.QueryString["search"] })">PUBLISHED DATE</a></th>
+                                <th scope="col" class="align-middle text-center">NUMBER OF DOWNLOADS</th>
+                                <th scope="col" class="align-middle"></th>
+                                <th scope="col" class="align-middle"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="headr-wrap">
+                            @if (Model.Count() == 0)
+                            {
+                                <tr> <td colspan="11" class="align-middle"> Records not found </td></tr>
+                            }
+                            @{
+                                int index = 0;
+                                if (Request.QueryString["pageindex"] == null || Request.QueryString["pageindex"].Equals("1"))
+                                {
+                                    index = 0;
+                                }
+                                else
+                                {
+                                    index = (Convert.ToInt32(Request.QueryString["pageindex"])-1) * 5;
+                                }
+                            }
+                            @for (int i = 0; i < Model.Count(); i++)
+                            {
+                                NotesMarketplace.Models.Dashboard_Admin note = Model[i];
+                                <tr style="cursor:default">
+                                    <td class="align-middle text-center">@(index + i+1)</td>
+                                    <td class="align-middle getpurple dopointer"><a href="@Url.Action("NoteDetails","Admin",new {noteid=note.notesDetail.P_K_Note})">@note.notesDetail.Title</a></td>
+                                    <td class="align-middle">@note.notesDetail.Category</td>
+                                    @{
+                                        var notesize = note.notesDetail.NoteSize / 1000;
+                                    }
+                                    <td class="align-middle text-center">@notesize KB</td>
+                                    @{
+                                        if (note.notesDetail.SellPrice == 0)
+                                        {
+                                            <td class="align-middle text-center">Free</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="align-middle text-center">Paid</td>
+                                        }
+                                    }
+                                    <td class="align-middle">$@note.notesDetail.SellPrice</td>
+                                    <td class="align-middle">@note.notesDetail.User.FirstName @note.notesDetail.User.LastName</td>
+                                    <td class="align-middle">@note.notesDetail.PublishedDate.Value.ToString("g").Replace(" ", ", ")</td>
+                                    <td class="align-middle text-center getpurple dopointer"><a href="@Url.Action("DownloadedNotes","Admin",new {noteid=note.notesDetail.P_K_Note})">@note.numberofdownload</a></td>
+                                    <td class="align-middle dopointer">
+                                        <div class="dropdown">
+                                            <a id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v dowhite"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="@Url.Action("DownloadFile","Home",new {fileName=note.notesDetail.NoteAttachment})">Download Notes</a>
+                                                <a class="dropdown-item" href="@Url.Action("NoteDetails","Admin",new {noteid=note.notesDetail.P_K_Note})">View More Details</a>
+                                                <a class="dropdown-item" onclick="AddReviews('@note.notesDetail.P_K_Note', '@note.notesDetail.Title')" data-toggle="modal" data-target="#exampleModal">Unpublish</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function AddReviews(id,title) {
+        document.getElementById("bookid").setAttribute("value", id);
+        document.getElementById("title").innerText = title;
+    }
+</script>
+<div class="modal fade modal-download" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a class="close" data-dismiss="modal" aria-label="Close">
+                            <img src="~/Content/images/Notes Details/close.png">
+                        </a>
+                    </div>
+                    <div class="model-data">
+                        <div class="model-head text-left">
+                            <p id="title">Add Review</p>
+                        </div>
+                        <form action="UnPublishNote">
+                            <div class="middel-content text-left">
+
+                                <input id="bookid" hidden name="noteid" />
+                                <input hidden name="view" value="Dashboard" />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <div class="textarea-input">
+                                                <label class="mylabel" for="InputEmail1">Remarks *</label>
+                                                @Html.TextArea("Remarks", new { @placeholder = "Comments...", @class = "form-control InputEmail1", @required = "required" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>Unpublish</b></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="pagination">
+    @Html.PagedListPager(Model, pageindex => Url.Action("Dashboard", "Admin", new { pageindex,search=Request.QueryString["search"],sort=Request.QueryString["sort"] }), new PagedList.Mvc.PagedListRenderOptions
+{
+    ContainerDivClasses = null,
+    LiElementClasses = new string[] { "page-item1" },
+    UlElementClasses = new string[] { "pagination justify-content-center" },
+    LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
+    LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>",
+    MaximumPageNumbersToDisplay = 5,
+    DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+    DisplayLinkToLastPage = PagedListDisplayMode.Never
+
+})
+</section>
+

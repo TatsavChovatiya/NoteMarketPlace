@@ -1,0 +1,227 @@
+﻿@model NotesMarketplace.UserProfile
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.title = "Member Details";
+    Layout = "~/Views/Shared/Admin_layout.cshtml";
+}
+
+<section id="notes-details-first-section">
+    <div class="container docenter">
+        <div class="row">
+            <div class="col-12 col-md-12 col-sm-12">
+                <div class="head">
+                    <h2>Member Details</h2>
+                </div>
+                <div class="row asd">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-7 r-border">
+                        <div class="row docenter">
+                            <div class=" col-12 col-sm-4 col-md-5 col-lg-4">
+                                @if (Model.ProfilePicture != null)
+                                {
+                                    <img class="img-fluid" src="~/Uploads/ProfilePicture/@Model.ProfilePicture">
+                                }
+                                else
+                                {
+                                    <img class="img-fluid" src="~/Uploads/ProfilePicture/Default.png">
+                                }
+                            </div>
+                            <div class="col-12 col-sm-8 col-md-7 col-lg-8">
+                                <div class="row">
+                                    <div class="col-6 col-sm-6 col-md-6 left-side-note text-left">
+                                        <h5>First Name:</h5>
+                                        <h5>Last Name:</h5>
+                                        <h5>Email:</h5>
+                                        <h5>DOB:</h5>
+                                        <h5>Phone Number:</h5>
+                                        <h5>College/University:</h5>
+                                    </div>
+                                    <div class="col-6 col-sm-6 col-md-6 right-side-note text-left">
+                                        <h5>@Model.User.FirstName</h5>
+                                        <h5>@Model.User.LastName</h5>
+                                        <h5>@Model.User.EmailId</h5>
+                                        @if (Model.DOB != null)
+                                        {
+                                            <h5>@Model.DOB</h5>
+                                        }
+                                        else
+                                        {
+                                            <h5>&nbsp;</h5>
+                                        }
+                                        <h5>@Model.PhoneNumber</h5>
+                                        @if (Model.University != null)
+                                        {
+                                            <h5>@Model.University</h5>
+                                        }
+                                        else
+                                        {
+                                            <h5>&nbsp;</h5>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-5 margin-top">
+                        <div class="row">
+                            <div class="col-6 col-sm-3 col-md-2 col-lg-5 left-side-note text-left">
+                                <h5>Address 1:</h5>
+                                <h5>Address 2:</h5>
+                                <h5>City:</h5>
+                                <h5>State:</h5>
+                                <h5>Country:</h5>
+                                <h5>Zip Code:</h5>
+                            </div>
+                            <div class="col-6 col-sm-4 col-md-6 col-lg-7 right-side-note text-left">
+                                <h5>@Model.Address1</h5>
+                                <h5>@Model.Address2</h5>
+                                @if (Model.City != null)
+                                {
+                                    <h5>@Model.City</h5>
+                                }
+                                else
+                                {
+                                    <h5>&nbsp;</h5>
+                                }
+                                @if (Model.State != null)
+                                {
+                                    <h5>@Model.State</h5>
+                                }
+                                else
+                                {
+                                    <h5>&nbsp;</h5>
+                                }
+                                @if (Model.Country != null)
+                                {
+                                    <h5>@Model.Country</h5>
+                                }
+                                else
+                                {
+                                    <h5>&nbsp;</h5>
+                                }
+                                @if (Model.ZipCode != null)
+                                {
+                                    <h5>@Model.ZipCode</h5>
+                                }
+                                else
+                                {
+                                    <h5>&nbsp;</h5>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="content-box-md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="notes-details-secondd-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-3 col-lg-5">
+                <h3>Notes</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="grid-table table-responsive-xl">
+                    <table class="table">
+                        <thead>
+                            <tr style="cursor:default">
+                                <th scope="col" class="align-middle text-center">SR NO.</th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("MemberDatails", "Admin", new { sort = "title", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">NOTE TITLE</a></th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("MemberDatails", "Admin", new { sort = "category", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">CATEGORY</a></th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("MemberDatails", "Admin", new { sort = "status", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">STATUS</a></th>
+                                <th scope="col" class="align-middle">DOWNLOADED NOTES</th>
+                                <th scope="col" class="align-middle">TOTAL EARNINGS</th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("MemberDatails", "Admin", new { sort = "", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">DATE ADDED</a></th>
+                                <th scope="col" class="align-middle dopointer"><a href="@Url.Action("MemberDatails", "Admin", new { sort = "pdate", pageindex = Request.QueryString["pageindex"], search = Request.QueryString["search"] })">PUBLISHED DATE</a></th>
+                                <th scope="col" class="align-middle"></th>
+                                <th scope="col" class="align-middle"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="headr-wrap">
+                            @if ((ViewBag.notes as IPagedList<NotesDetail>).Count() == 0)
+                            {
+                                <tr> <td colspan="10" class="align-middle"> Records not found </td></tr>
+                            }
+                            @{
+                                int index = 0;
+                                if (Request.QueryString["pageindex"] == null || Request.QueryString["pageindex"].Equals("1"))
+                                {
+                                    index = 0;
+                                }
+                                else
+                                {
+                                    index = (Convert.ToInt32(Request.QueryString["pageindex"]) - 1) * 5;
+                                }
+                            }
+                            @for (int i = 0; i < (ViewBag.notes as IPagedList<NotesDetail>).Count(); i++)
+                            {
+                                NotesDetail nd=(ViewBag.notes as IPagedList<NotesDetail>)[i];
+                        <tr style="cursor:default">
+                            <td class="text-center align-middle">@(index + i+1)</td>
+                            <td class="align-middle getpurple dopointer"><a href="@Url.Action("NoteDetails","Admin",new {noteid=nd.P_K_Note})">@nd.Title</a></td>
+                            <td class="align-middle">@nd.Category</td>
+                            <td class="align-middle">@nd.NotesStatu.Name</td>
+                            <td class="align-middle getpurple dopointer" align="center"><a href="@Url.Action("DownloadedNotes","Admin",new { noteid=nd.P_K_Note})">@Model.User.DownloadedNotes.Where(m => m.IsApproved && m.F_K_Note == nd.P_K_Note).Count()</a></td>
+                            <td class="align-middle" align="center">$@Model.User.DownloadedNotes.Where(m => m.IsApproved && m.F_K_Note == nd.P_K_Note).Select(m=>m.SellPrice).Sum()</td>
+                            <td class="align-middle">@nd.CreatedDate.Value.ToString("g").Replace(" ", ", ")</td>
+                            @{
+                                if (nd.PublishedDate != null)
+                                {
+                                    <td class="align-middle">@nd.PublishedDate.Value.ToString("g").Replace(" ", ", ")</td>
+                                }
+                                else
+                                {
+                                    <td class="align-middle">NA</td>
+                                }
+                            }
+
+                            <td class="align-middle dopointer" align="center">
+                                <div class="dropdown">
+                                    <a data-toggle="dropdown">
+                                        <i class="fas fa-ellipsis-v dowhite"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="@Url.Action("DownloadFile","Home",new {fileName=nd.NoteAttachment})">Download Notes</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                            }
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="pagination">
+        @Html.PagedListPager(ViewBag.notes as IPagedList<NotesDetail>, pageindex => Url.Action("MemberDatails", "Admin", new { pageindex, search = Request.QueryString["search"], sort = Request.QueryString["sort"] }), new PagedList.Mvc.PagedListRenderOptions
+    {
+        ContainerDivClasses = null,
+        LiElementClasses = new string[] { "page-item1" },
+        UlElementClasses = new string[] { "pagination justify-content-center" },
+        LinkToNextPageFormat = "<i class='fa fa-chevron-right'></i>",
+        LinkToPreviousPageFormat = "<i class='fa fa-chevron-left'></i>",
+        MaximumPageNumbersToDisplay = 5,
+        DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+        DisplayLinkToLastPage = PagedListDisplayMode.Never
+
+    })
+    </section>
+</section>
